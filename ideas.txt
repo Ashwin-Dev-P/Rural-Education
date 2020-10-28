@@ -1,0 +1,9 @@
+ideas
+
+Add carausol to display info that the user can contribute for the development of websit too.
+
+change logo to EducationForEveryone.
+
+
+
+common pdfs such as tamil and english are not displayed in english medium.
