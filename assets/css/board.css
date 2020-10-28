@@ -1,0 +1,139 @@
+.row-header {
+  margin: 0px auto;
+  padding: 0px 0px; }
+
+.row-content {
+  margin: 0px auto;
+  padding: 50px 0px;
+  border-bottom: 1px ridge;
+  min-height: 400px; }
+
+
+
+.jumbotron {
+  margin: 0px auto;
+  padding: 70px 30px;
+  background: #9575CD;
+  color: floralwhite; }
+
+address {
+  font-size: 80%;
+  margin: 0px;
+  color: #0f0f0f; }
+
+body {
+  padding: 50px 0px 0px 0px;
+  z-index: 0; }
+
+.navbar-dark {
+  background-color: #512DA8; }
+
+.tab-content {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 10px; }
+
+.carousel {
+  background: #512DA8; }
+  .carousel .carousel-item {
+    height: 300px; }
+    .carousel .carousel-item img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-height: 300px; }
+
+#carouselButton {
+  right: 0px;
+  position: absolute;
+  bottom: 0px;
+  z-index: 1; }
+
+.modal-header {
+  background: #FFFFFF;
+   }
+.modal-header .close {
+    color: #000000; 
+	}
+
+.modal-body {
+	background: #FFFFFF;
+	max-height:100px;  }
+	
+
+.navbar-toggler{
+	float:right;
+}
+.mainbody{
+	min-height:70vh;
+}
+#GetStartedButton{
+	margin: auto;
+	width:100%;
+	transform: translate(0%, 250%);
+	font-size:20px;
+	color: floralwhite;
+	background-color: #512DA8;
+	padding: 10px 50px 10px 50px;
+}
+.footer {
+  background-color: #D1C4E9;
+  margin: 0px auto;
+  padding: 20px 0px; }
+
+.card{
+	margin: 40px 30px;
+}
+.card img{
+	width:180px;
+    height: auto;
+	margin:auto;
+	padding: 25px 0px;
+}
+.card  h5{
+	text-align: center;
+}
+.CardAnchor{
+	margin-left: 33%;
+    width: 33%;
+}
+.mybreadcrumbs{
+	margin-top: 10px;
+}
+a{
+	color: #512DA8;
+}
+
+
+
+
+
+
+.card:hover {
+	transform:scale(1.15);
+	transition-delay: .2s;
+	transition-duration: .3s;
+}
+.mainbody{
+	
+	min-height:100vh;
+}
+.boarddiv{
+	margin-top:  8%;
+}
+#ChooseLanguage{
+	
+	text-align:center;
+	color: #512DA8;
+}
+.standardlist{
+	text-align:center;
+	
+}
+.row{
+	margin-bottom:10px;
+}
+.PDFnames{
+	font-size: 25px;
+}
