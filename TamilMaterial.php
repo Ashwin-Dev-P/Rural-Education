@@ -105,6 +105,10 @@
 						$valid = 1;
 						if( $_GET['content'] == "StudyMaterial"){
 							switch($_GET['standard']) {
+								
+								case 13:
+									$path="https://drive.google.com/drive/folders/1i0Sum-7DicWoVzbLLsW96mudW3yTKe-X?usp=sharing/";
+									break;
 								case 1:
 									$path="assets/pdf/StateBoard/Tamil/StudyMaterial/Standard1/";
 									break;
