@@ -8,42 +8,55 @@
 		if( isset($_POST['EmailId']) ){
 			$_SESSION['EmailId'] = $_POST['EmailId'];
 		}
+		if( isset($_POST['username']) ){
+			$_SESSION['username'] = $_POST['username'];
+		}
+		if( isset($_POST['feedback']) ){
+			$_SESSION['feedback'] = $_POST['feedback'];
+		}
+		if( !isset($_POST['ContactApproval']) ){
+			$_POST['ContactApproval'] = "No";
+		}
 		if(isset($_POST['username']) && strlen($_POST['username'])>0 ){
-			if( isset($_POST['feedback']) && strlen($_POST['feedback'])>0 ){
-				
-				
-				$sql = "INSERT INTO feedback(Name, Number, EmailId,ContactApproval,feedback,Date,Time,Meridiem) VALUES (:Name ,:Number,:EmailId, :ContactApproval,:feedback,:Date,:Time,:Meridiem)";
 			
-				$stmt = $pdo->prepare($sql);
+			if( isset($_POST['feedback']) && strlen($_POST['feedback'])>0 ){
+				if(isset($_POST['ContactApproval']) && $_POST['ContactApproval'] == "Yes" ){
+					if((  !isset($_POST['EmailId']) || strlen($_POST['EmailId']) < 1 ) && (  !isset($_POST['Number']) || strlen($_POST['Number']) < 1 ) ){
+						$_SESSION['error'] = "Enter your Email-Id or contact number to contact you.Or uncheck the 'May we contact you?' checkbox.";
+					}
+				}
+				else{
 				
-				$stmt->execute(array(
-				':Name' => htmlentities($_POST['username']),
-				':Number' => htmlentities($_POST['Number']),
-				':EmailId' => htmlentities($_POST['EmailId']),
-				':ContactApproval' => htmlentities($_POST['ContactApproval']),
-				':feedback' => htmlentities($_POST["feedback"]),
-				':Date' => $_POST["Date"],
-				':Time' => $_POST["Time"],
-				':Meridiem' => $_POST['Meridiem']
-				));
-				$_SESSION['success'] = "Thanks for feedback";
-				unset($_SESSION['username']);
-				unset($_SESSION['Number']);
-				unset($_SESSION['EmailId']);
-				unset($_SESSION['feedback']);
+					$sql = "INSERT INTO feedback(Name, Number, EmailId,ContactApproval,feedback,Date,Time,Meridiem) VALUES (:Name ,:Number,:EmailId, :ContactApproval,:feedback,:Date,:Time,:Meridiem)";
+				
+					$stmt = $pdo->prepare($sql);
+					
+					$stmt->execute(array(
+					':Name' => htmlentities($_POST['username']),
+					':Number' => htmlentities($_POST['Number']),
+					':EmailId' => htmlentities($_POST['EmailId']),
+					':ContactApproval' => htmlentities($_POST['ContactApproval']),
+					':feedback' => htmlentities($_POST["feedback"]),
+					':Date' => $_POST["Date"],
+					':Time' => $_POST["Time"],
+					':Meridiem' => $_POST['Meridiem']
+					));
+					$_SESSION['success'] = "Thanks for feedback";
+					unset($_SESSION['username']);
+					unset($_SESSION['Number']);
+					unset($_SESSION['EmailId']);
+					unset($_SESSION['feedback']);
+				}
 			}
 			else{
 				$_SESSION['error'] = "Enter feedback.";
-				$_SESSION['username'] = $_POST['username'];
 			}
 			
 			
 		}
 		else{
 			$_SESSION['error'] = "Enter your name.";
-			if(isset($_POST['feedback']) && strlen($_POST['feedback'])>0){
-				$_SESSION['feedback'] = $_POST['feedback'];
-			}
+			
 			
 		}
 		
@@ -108,7 +121,7 @@
 					<div class="modal-body">
 						<div class="row container ">
 							
-								<div class="col-xs-12 col-md-6 ">
+								<div class="col-xs-12 col-md-12 ">
 								<?php
 									if( isset($_SESSION['error']) ){
 										echo "<p style='color:red;font-size:25px;'>".$_SESSION['error']."</p>";
@@ -116,7 +129,7 @@
 									}
 								?>
 								</div>
-								<div class="col-xs-12 col-md-6 offset-4">	
+								<div class="col-xs-12 col-md-12 ">	
 								<?php
 									if( isset($_SESSION['success']) ){
 										echo "<p style='color:green;font-size:25px;'>".$_SESSION['success']."</p>";

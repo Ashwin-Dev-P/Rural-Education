@@ -59,7 +59,7 @@ body {
 
 .modal-body {
 	background: #FFFFFF;
-	max-height:100px;  }
+	min-height:100px;  }
 	
 
 .navbar-toggler{
