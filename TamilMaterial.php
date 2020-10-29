@@ -98,52 +98,56 @@
 
 
 			<!--Board selection-->
-			<div class="row  justify-content-md-center">
-				
+			<!--Board selection-->
+			<div class="row justify-content-md-center">
+				<?php
 					
-					<?php
 						$valid = 1;
 						if( $_GET['content'] == "StudyMaterial"){
 							switch($_GET['standard']) {
-								
-								case 13:
-									$path="https://drive.google.com/drive/folders/1i0Sum-7DicWoVzbLLsW96mudW3yTKe-X?usp=sharing/";
-									break;
 								case 1:
-									$path="assets/pdf/StateBoard/Tamil/StudyMaterial/Standard1/";
+									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard1/";
 									break;
 								case 2:
-									$path="assets/pdf/StateBoard/Tamil/StudyMaterial/Standard2/";
+									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard2/";
 									break;
 								case 3:
-									$path="assets/pdf/StateBoard/Tamil/StudyMaterial/Standard3/";
+									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard3/";
 									break;
 								case 4:
-									$path="assets/pdf/StateBoard/Tamil/StudyMaterial/Standard4/";
+									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard4/";
 									break;
 								case 5:
-									$path="assets/pdf/StateBoard/Tamil/StudyMaterial/Standard5/";
+									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard5/";
 									break;
 								case 6:
-									$path="assets/pdf/StateBoard/Tamil/StudyMaterial/Standard6/";
+									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard6/";
 									break;
 								case 7:
-									$path="assets/pdf/StateBoard/Tamil/StudyMaterial/Standard7/";
+									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard7/";
 									break;
 								case 8:
-									$path="assets/pdf/StateBoard/Tamil/StudyMaterial/Standard8/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1qytWTcxjnwiEpivrfgU5gJGGJcdlkDvW#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
+									
 									break;
 								case 9:
-									$path="assets/pdf/StateBoard/Tamil/StudyMaterial/Standard9/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1KPOAx3o7B1t1-TrlQQGBuc522v_F14Hi#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 10:
-									$path="assets/pdf/StateBoard/Tamil/StudyMaterial/Standard10/";
+								
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1rsUzCLioFgrnYDerDBC0QstttAj6iFCB#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 11:
-									$path="assets/pdf/StateBoard/Tamil/StudyMaterial/Standard11/";
+									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard11/";
 									break;
 								case 12:
-									$path="assets/pdf/StateBoard/Tamil/StudyMaterial/Standard12/";
+									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard12/";
 									break;
 								default:
 									echo "
@@ -160,40 +164,40 @@
 							
 							switch($_GET['standard']) {
 								case 1:
-									echo "Standard1";
+									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard1/";
 									break;
 								case 2:
-									echo "Standard2";
+									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard2/";
 									break;
 								case 3:
-									echo "Standard3";
+									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard3/";
 									break;
 								case 4:
-									echo "Standard4";
+									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard4/";
 									break;
 								case 5:
-									echo "Standard5";
+									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard5/";
 									break;
 								case 6:
-									echo "Standard6";
+									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard6/";
 									break;
 								case 7:
-									echo "Standard7";
+									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard7/";
 									break;
 								case 8:
-									echo "Standard8";
+									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard8/";
 									break;
 								case 9:
-									echo "Standard9";
+									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard9/";
 									break;
 								case 10:
-									echo "Standard10";
+									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard10/";
 									break;
 								case 11:
-									echo "Standard11";
+									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard11/";
 									break;
 								case 12:
-									echo "Standard12";
+									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard12/";
 									break;
 								default:
 									echo "
@@ -207,52 +211,15 @@
 						else{
 							echo "
 								<li class='list-group-item list-group-item-action standardlist col-xs-12 col-md-9 col-lg-8'>
-									<div class='col-xs-12 PDFnames' style='color:red;'>Invalid Content parameters.Contact the server for help.</div>
+									<div class='col-xs-12 PDFnames' style='color:red;'>Invalid Content Parameters.Contact the server for help.</div>
 								</li>
-									";
+							";
 							$valid=0;
 						}
 						
-						if($valid == 1){
-							
-							$myDirectory = opendir($path);
-							while($entryName = readdir($myDirectory)) {
-								$dirArray[] = $entryName;
-							}
-							closedir($myDirectory);
-							
-							
-							$indexCount	= count($dirArray);
-							if($indexCount == 2){
-								echo "
-										<li class='list-group-item list-group-item-action standardlist col-xs-12 col-md-9 col-lg-8'>
-											<div class='col-xs-12 PDFnames'>No Content Available</div>
-										</li>
-									";
-							}
-							else{
-								echo "<ul class='col-xs-12 col-md-8'>";
-								for($index=0; $index < $indexCount; $index++) {
-									$extension = substr($dirArray[$index], -3);
-									if ($extension == 'pdf'){ // list only jpgs
-										echo "
-											<li class='list-group-item list-group-item-action standardlist'>
-												<div class='col-xs-12 PDFnames'>".substr($dirArray[$index],0,-4)."</div>
-												<div class='pdfAction col-xs-12'>
-													<a href='".$path.$dirArray[$index]."' target='_blank'>View</a> |
-													<a href='download.php?file=".$path.$dirArray[$index]."'>Download</a>
-												</div>
-											</li>
-										";
-									}	
-								}
-								echo "</ul>";
-							}
-							unset($valid);
-						}
-					?>
+						
 					
-
+					?>
 
 			</div>
 		</div>

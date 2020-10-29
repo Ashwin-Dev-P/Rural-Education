@@ -126,13 +126,21 @@
 									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard7/";
 									break;
 								case 8:
-									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard8/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1lwQUdpdEX-fAUIj0d0b64efmU6nqev_V#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
+									
 									break;
 								case 9:
-									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard9/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1n9cj8kszyUURtAYyWLZ_8oI1S6ScyRbJ#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 10:
-									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard10/";
+								
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=16xmZmWLzrGP5h24_u9UcFbJZAN0-jTI_#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 11:
 									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard11/";
@@ -208,43 +216,7 @@
 							$valid=0;
 						}
 						
-						if($valid == 1){
-							
-							$myDirectory = opendir($path);
-							while($entryName = readdir($myDirectory)) {
-								$dirArray[] = $entryName;
-							}
-							closedir($myDirectory);
-							
-							
-							$indexCount	= count($dirArray);
-							if($indexCount == 2){
-								echo "
-										<li class='list-group-item list-group-item-action standardlist col-xs-12 col-md-9 col-lg-8'>
-											<div class='col-xs-12 PDFnames'>No Content Available</div>
-										</li>
-									";
-							}
-							else{
-								echo "<ul class='col-xs-12 col-md-8'>";
-								for($index=0; $index < $indexCount; $index++) {
-									$extension = substr($dirArray[$index], -3);
-									if ($extension == 'pdf'){ // list only jpgs
-										echo "
-											<li class='list-group-item list-group-item-action standardlist'>
-												<div class='col-xs-12 PDFnames'>".substr($dirArray[$index],0,-4)."</div>
-												<div class='pdfAction col-xs-12'>
-													<a href='".$path.$dirArray[$index]."' target='_blank'>View</a> |
-													<a href='download.php?file=".$path.$dirArray[$index]."'>Download</a>
-												</div>
-											</li>
-										";
-									}	
-								}
-								echo "</ul>";
-							}
-							unset($valid);
-						}
+						
 					
 					?>
 
