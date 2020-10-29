@@ -1,10 +1,35 @@
 <?php
+	require_once "pdo.php";
 	session_start();
 	if(isset($_POST['send'])){
+		if( isset($_POST['Number']) ){
+			$_SESSION['Number'] = $_POST['Number'];
+		}
+		if( isset($_POST['EmailId']) ){
+			$_SESSION['EmailId'] = $_POST['EmailId'];
+		}
 		if(isset($_POST['username']) && strlen($_POST['username'])>0 ){
 			if( isset($_POST['feedback']) && strlen($_POST['feedback'])>0 ){
+				
+				
+				$sql = "INSERT INTO feedback(Name, Number, EmailId,ContactApproval,feedback,Date,Time,Meridiem) VALUES (:Name ,:Number,:EmailId, :ContactApproval,:feedback,:Date,:Time,:Meridiem)";
+			
+				$stmt = $pdo->prepare($sql);
+				
+				$stmt->execute(array(
+				':Name' => htmlentities($_POST['username']),
+				':Number' => htmlentities($_POST['Number']),
+				':EmailId' => htmlentities($_POST['EmailId']),
+				':ContactApproval' => htmlentities($_POST['ContactApproval']),
+				':feedback' => htmlentities($_POST["feedback"]),
+				':Date' => $_POST["Date"],
+				':Time' => $_POST["Time"],
+				':Meridiem' => $_POST['Meridiem']
+				));
 				$_SESSION['success'] = "Thanks for feedback";
 				unset($_SESSION['username']);
+				unset($_SESSION['Number']);
+				unset($_SESSION['EmailId']);
 				unset($_SESSION['feedback']);
 			}
 			else{
@@ -27,10 +52,16 @@
 	if( !isset($_SESSION['username']) ){
 		$_SESSION['username'] = "";
 	}
+	if( !isset($_SESSION['Number']) ){
+		$_SESSION['Number'] = "";
+	}
+	if( !isset($_SESSION['EmailId']) ){
+		$_SESSION['EmailId'] = "";
+	}
 	if( !isset($_SESSION['feedback']) ){
 		$_SESSION['feedback'] = "";
 	}
-	
+	date_default_timezone_set('Asia/Kolkata');
 
 ?>
 <!DOCTYPE html>
@@ -172,19 +203,19 @@
 						<div class="form-group row">
 							<label for="telnum" class="col-12 col-md-2 col-form-label">Contact Tel.</label>
 							<div class="col-12 col-md-10">
-								<input type="tel" class="form-control" id="telnum" name="telnum" placeholder="Tel. number  (optional)">
+								<input type="tel" class="form-control" id="telnum" name="Number" placeholder="Tel. number  (optional)" value="<?=$_SESSION['Number']?>">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="emailid" class="col-md-2 col-form-label">Email</label>
 							<div class="col-md-10">
-								<input type="email" class="form-control" id="emailid" name="emailid" placeholder="Email  (optional)">
+								<input type="email" class="form-control" id="emailid" name="EmailId" placeholder="Email  (optional)" value="<?=$_SESSION['EmailId']?>">
 							</div>
 						</div>
 						<div class="form-group row">
 							<div class="col-md-6 offset-md-2">
 								<div class="form-check">
-									<input type="checkbox" class="form-check-input" name="approve" id="approve" value="" checked>
+									<input type="checkbox" class="form-check-input" name="ContactApproval" id="approve" value="Yes" checked>
 									<label class="form-check-label" for="approve">
 										<strong>May we contact you?</strong>
 									</label>
@@ -203,6 +234,12 @@
 								<button type="submit" class="btn btn-primary" name="send" id="send">Send Feedback</button>
 							</div>
 						</div>
+						
+						<input type="date" value="<?php echo date('Y-m-d');?>" name="Date" id="creationdate" hidden>
+					
+						<input type="time" id="creationtime" name="Time" value="<?php echo date('h:i:s');?>"  hidden>
+					
+						<input type="text" name="Meridiem" id="ampm" value="<?php echo date('A');?>" hidden>
 					</form>
 				</div>
 			</div>
@@ -251,27 +288,27 @@
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/modal.js"></script>
 		<?php
-									if( isset($_SESSION['error']) ){
-										echo "
-										<script>
-											function toggle(){
-												$('#loginModal').modal('show');
-											}
-											toggle() 
-										</script>";
-										unset($_SESSION['error']);
-										
-									}
-									else if( isset($_SESSION['success']) ){
-										echo "
-										<script>
-											function toggle(){
-												$('#loginModal').modal('show');
-											}
-											toggle() 
-										</script>";
-										unset($_SESSION['success']);
-									}
-								?>	
+			if( isset($_SESSION['error']) ){
+				echo "
+				<script>
+					function toggle(){
+						$('#loginModal').modal('show');
+					}
+					toggle() 
+				</script>";
+				unset($_SESSION['error']);
+				
+			}
+			else if( isset($_SESSION['success']) ){
+				echo "
+				<script>
+					function toggle(){
+						$('#loginModal').modal('show');
+					}
+					toggle() 
+				</script>";
+				unset($_SESSION['success']);
+			}
+		?>	
 	</body>
 </html>
