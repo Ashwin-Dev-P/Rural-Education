@@ -24,6 +24,28 @@
 					if((  !isset($_POST['EmailId']) || strlen($_POST['EmailId']) < 1 ) && (  !isset($_POST['Number']) || strlen($_POST['Number']) < 1 ) ){
 						$_SESSION['error'] = "Enter your Email-Id or contact number to contact you.Or uncheck the 'May we contact you?' checkbox.";
 					}
+					else{
+						$sql = "INSERT INTO feedback(Name, Number, EmailId,ContactApproval,feedback,Date,Time,Meridiem) VALUES (:Name ,:Number,:EmailId, :ContactApproval,:feedback,:Date,:Time,:Meridiem)";
+				
+						$stmt = $pdo->prepare($sql);
+						
+						$stmt->execute(array(
+						':Name' => htmlentities($_POST['username']),
+						':Number' => htmlentities($_POST['Number']),
+						':EmailId' => htmlentities($_POST['EmailId']),
+						':ContactApproval' => htmlentities($_POST['ContactApproval']),
+						':feedback' => htmlentities($_POST["feedback"]),
+						':Date' => $_POST["Date"],
+						':Time' => $_POST["Time"],
+						':Meridiem' => $_POST['Meridiem']
+						));
+						$_SESSION['success'] = "Thanks for feedback";
+						unset($_SESSION['username']);
+						unset($_SESSION['Number']);
+						unset($_SESSION['EmailId']);
+						unset($_SESSION['feedback']);
+						
+					}
 				}
 				else{
 				
