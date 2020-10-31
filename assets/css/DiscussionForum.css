@@ -110,12 +110,6 @@ a{
 
 
 
-.card:hover {
-	transform:scale(1.15);
-	transition-delay: .2s;
-	transition-duration: .3s;
-	
-}
 .mainbody{
 	
 	min-height:100vh;

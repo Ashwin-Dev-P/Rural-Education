@@ -11,7 +11,11 @@ $(document).ready(function(){
 	
 });
 function toggle(){
-	$('#loginModal').modal('show');
+	$('#SignUpModal').modal('toggle');
+}
+function togglelogin(){
+	$('#loginModal').modal('toggle');
+	
 }
 
 

@@ -1,3 +1,25 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['fullname'])){
+		$_SESSION['fullname'] = "";
+	}
+	if(!isset($_SESSION['username'])){
+		$_SESSION['username'] = "";
+	}
+	if(!isset($_SESSION['password'])){
+		$_SESSION['password'] = "";
+	}
+	if(!isset($_SESSION['passwordconfirmation'])){
+		$_SESSION['passwordconfirmation'] = "";
+	}
+	if(!isset($_SESSION['emailid'])){
+		$_SESSION['emailid'] = "";
+	}
+	if(!isset($_SESSION['number'])){
+		$_SESSION['number'] = "";
+	}
+
+?>
 <!DOCTYPE html>
 <html lang = "en">
 	<head>
@@ -76,88 +98,88 @@
 				<div class="col-12">
 					<ol class="col-12 breadcrumb">
 						<li class="breadcrumb-item"><a href="./index.html">Home</a></li>
-						<li class="breadcrumb-item active">Board</li>
+						<li class="breadcrumb-item active">Sign Up</li>
 					</ol>
 				</div>
 			</div>
 
 
 			<!--Board selection-->
-			<div class="row boarddiv">
-				<div class="col-sm-6 divhover">
-					<a href="Stateboard.html">
-						<div class="card " >
-							<img class="card-img-top" src="assets/img/StateBoardIcon2.png" alt="State Board" height="50px" width="50px">
-							<div class="card-body">
-								<h5 class="card-title">State Board</h5>
-							</div>
+			<div class="row boarddiv justify-content-center">
+				<div class="row container  justify-content-center">	
+			   
+					<!--Sign In Form-->
+					<div class="col-12 border">
+						<div class="col-12 justify-content-center ">
+							<p style="text-align:center;font-weight:700;font-size:55px;color:#512DA8;">SIGN UP</p>
 						</div>
-					</a>
-				</div>
+						<form method="post" id="FeedBackForm" name="FeedBackForm" >
+							<div class="form-group row">
+								<label for="name" class="col-md-2 col-form-label">Full Name</label>
+								<div class="col-md-10">
+									<input type="text" class="form-control" id="username" name="username" placeholder="Name" value="<?=$_SESSION['fullname']?>">
+								</div>
+							</div>
+							
+							<div class="form-group row ">
+								<label for="name" class="col-md-2 col-form-label">User Name</label>
+								<div class="col-md-10">
+									<input type="text" class="form-control" id="username" name="username" placeholder="Name" value="<?=$_SESSION['username']?>">
+								</div>
+							</div>
+							
+							<div class="form-group row">
+								<label for="telnum" class="col-12 col-md-2 col-form-label">Mobile Number</label>
+								<div class="col-12 col-md-10">
+									<input type="tel" class="form-control" id="telnum" name="Number" placeholder="Tel. number  (optional)" value="<?=$_SESSION['number']?>">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="emailid" class="col-md-2 col-form-label">Email Id</label>
+								<div class="col-md-10">
+									<input type="email" class="form-control" id="emailid" name="EmailId" placeholder="Email  (optional)" value="<?=$_SESSION['emailid']?>">
+								</div>
+							</div>
+							
+							<div class="form-group row">
+								<label for="name" class="col-md-2 col-form-label">Password</label>
+								<div class="col-md-10">
+									<input type="text" class="form-control" id="username" name="username" placeholder="Name" value="<?=$_SESSION['password']?>">
+								</div>
+							</div>
+							
+							<div class="form-group row">
+								<label for="name" class="col-md-2 col-form-label">Password Confirmation</label>
+								<div class="col-md-10">
+									<input type="text" class="form-control" id="username" name="username" placeholder="Name" value="<?=$_SESSION['passwordconfirmation']?>">
+								</div>
+							</div>
+							
+							
+							<div class="form-group row ml-auto">
+								<div class="offset-md-2 col-md-10 ">
+									<button type="submit" class="btn mybutton " name="send" id="send" style="float:right;" >SIGN UP</button>
+								</div>
+							</div>
+							
+							<input type="date" value="<?php echo date('Y-m-d');?>" name="Date" id="creationdate" hidden>
+						
+							<input type="time" id="creationtime" name="Time" value="<?php echo date('h:i:s');?>"  hidden>
+						
+							<input type="text" name="Meridiem" id="ampm" value="<?php echo date('A');?>" hidden>
+							
+						</form>
+					</div>
+					
+					<div class="col-12 border  justify-content-center">
+						<p style="text-align:center;padding:30px;font-size:25px;" >Already have an account?<a href="login.php">LOG IN</a></p>
+					</div>
 					
 
 
 
-				<div class="col-sm-6 divhover">
-					<a href="NEET.html">
-						<div class="card " >
-							<img class="card-img-top" src="assets/img/NEETIcon.jpg" alt="NEET" height="50px" width="50px">
-							<div class="card-body">
-								<h5 class="card-title">NEET Preparation</h5>
-							</div>
-						</div>
-					</a>
-				</div>
 				
-				<div class="col-sm-6 divhover">
-					<a href="JEE.html">
-						<div class="card " >
-							<img class="card-img-top" src="assets/img/JEEIcon.png" alt="JEE" height="50px" width="50px">
-							<div class="card-body">
-								<h5 class="card-title">JEE Preparation</h5>
-							</div>
-						</div>
-					</a>
 				</div>
-				
-				<div class="col-sm-6 divhover">
-					<a href="Stateboard.html">
-						<div class="card " >
-							<img class="card-img-top" src="assets/img/job2.jpg" alt="job" height="50px" width="50px">
-							<div class="card-body">
-								<h5 class="card-title">Job Opportunities</h5>
-							</div>
-						</div>
-					</a>
-				</div>
-				
-				<div class="col-sm-6 divhover">
-					<a href="EducationalYoutubeChannels.html">
-						<div class="card " >
-							<img class="card-img-top" src="assets/img/YouTubeIcon.png" alt="job" height="50px" width="50px">
-							<div class="card-body">
-								<h5 class="card-title">Educational Youtube Channels</h5>
-							</div>
-						</div>
-					</a>
-				</div>
-				
-				<div class="col-sm-6 divhover">
-					<a href="OtherEducationalSites.html">
-						<div class="card " >
-							<img class="card-img-top" src="assets/img/OtherEducationalSites.png" alt="job" height="50px" width="50px">
-							<div class="card-body">
-								<h5 class="card-title">Other Educational sites</h5>
-							</div>
-						</div>
-					</a>
-				</div>
-					
-
-
-
-				
-
 			</div>
 
 
