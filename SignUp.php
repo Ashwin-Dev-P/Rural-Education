@@ -1,10 +1,200 @@
 <?php
 	session_start();
+	require_once "pdo.php";
+	if(   isset($_POST["fullname"]) && isset($_POST["username"]) && isset($_POST["password"])  &&isset($_POST["passwordconfirmation"])   ){
+		$password = $_POST["password"];
+		$email = $_POST["email"];
+		
+		$uppercase = preg_match('@[A-Z]@', $password);
+		$lowercase = preg_match('@[a-z]@', $password);
+		$number    = preg_match('@[0-9]@', $password);
+		$specialChars = preg_match('@[^\w]@', $password);
+	
+		if( strlen($_POST["fullname"]) < 1){
+			$_SESSION["error"] = "Full name is required.";
+			if(strlen($_POST["username"]) > 0){
+				$_SESSION["username"]= $_POST["username"];
+			}
+			if(strlen($_POST["password"]) > 0){
+				$_SESSION["password"]= $_POST["passwordconfirmation"];
+			}
+			if(strlen($_POST["passwordconfirmation"]) > 0){
+				$_SESSION["passwordconfirmation"]= $_POST["passwordconfirmation"];
+			}
+			if(strlen($_POST["email"]) > 0){
+				$_SESSION["email"]= $_POST["email"];
+			}
+			if(strlen($_POST["number"]) > 0){
+				$_SESSION["number"]= $_POST["number"];
+			}
+		}
+		else if(  strlen($_POST["username"]) < 1){
+			$_SESSION["error"] = "User name is required";
+		
+			$_SESSION["fullname"]= $_POST["fullname"];
+			if(strlen($_POST["password"]) > 0){
+				$_SESSION["password"]= $_POST["passwordconfirmation"];
+			}
+			if(strlen($_POST["passwordconfirmation"]) > 0){
+				$_SESSION["passwordconfirmation"]= $_POST["passwordconfirmation"];
+			}
+			if(strlen($_POST["email"]) > 0){
+				$_SESSION["email"]= $_POST["email"];
+			}
+			if(strlen($_POST["number"]) > 0){
+				$_SESSION["number"]= $_POST["number"];
+			}
+		}
+		else if( strlen($_POST["password"]) < 1){
+			$_SESSION["error"] = "password is required";
+		
+			$_SESSION["fullname"]= $_POST["fullname"];
+			$_SESSION["username"]= $_POST["username"];
+			if(strlen($_POST["passwordconfirmation"]) > 0){
+				$_SESSION["passwordconfirmation"]= $_POST["passwordconfirmation"];
+			}
+			if(strlen($_POST["email"]) > 0){
+				$_SESSION["email"]= $_POST["email"];
+			}
+			if(strlen($_POST["number"]) > 0){
+				$_SESSION["number"]= $_POST["number"];
+			}
+		}
+		else if(  strlen($_POST["passwordconfirmation"]) < 1){
+			$_SESSION["error"] = "password confirmation is required";
+		
+			$_SESSION["username"]= $_POST["username"];
+			$_SESSION["password"]= $_POST["password"];
+			$_SESSION["fullname"]= $_POST["fullname"];
+			if(strlen($_POST["email"]) > 0){
+				$_SESSION["email"]= $_POST["email"];
+			}
+			if(strlen($_POST["number"]) > 0){
+				$_SESSION["number"]= $_POST["number"];
+			}
+		}
+		else if( $_POST["password"] !== $_POST["passwordconfirmation"]  ){
+			$_SESSION["error"] = "Both the passwords does not match.";
+		
+			$_SESSION["username"]= $_POST["username"];
+			$_SESSION["password"]= $_POST["password"];
+			$_SESSION["passwordconfirmation"]= $_POST["passwordconfirmation"];
+			$_SESSION["fullname"]= $_POST["fullname"];
+			if(strlen($_POST["email"]) > 0){
+				$_SESSION["email"]= $_POST["email"];
+			}
+			if(strlen($_POST["number"]) > 0){
+				$_SESSION["number"]= $_POST["number"];
+			}
+		}
+		else if( strlen($_POST["password"]) < 8 ){
+			$_SESSION["error"] ='Password should include at least one upper case letter, one number, and one special character.';
+			$_SESSION["username"]= $_POST["username"];
+			$_SESSION["password"]= $_POST["password"];
+			$_SESSION["passwordconfirmation"]= $_POST["passwordconfirmation"];
+			$_SESSION["fullname"]= $_POST["fullname"];
+			if(strlen($_POST["email"]) > 0){
+				$_SESSION["email"]= $_POST["email"];
+			}
+			if(strlen($_POST["number"]) > 0){
+				$_SESSION["number"]= $_POST["number"];
+			}
+		}
+		else if(!$uppercase || !$lowercase || !$number || !$specialChars ) {
+			$_SESSION["error"] ='Password should include at least one upper case letter, one number, and one special character.';
+			$_SESSION["username"]= $_POST["username"];
+			$_SESSION["password"]= $_POST["password"];
+			$_SESSION["passwordconfirmation"]= $_POST["passwordconfirmation"];
+			$_SESSION["fullname"]= $_POST["fullname"];
+			if(strlen($_POST["email"]) > 0){
+				$_SESSION["email"]= $_POST["email"];
+			}
+			if(strlen($_POST["number"]) > 0){
+				$_SESSION["number"]= $_POST["number"];
+			}
+		}
+		else if ( strlen($_POST["email"]) >= 1 and !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			$_SESSION["error"] = "Invalid email format";
+			$_SESSION["username"]= $_POST["username"];
+			$_SESSION["password"]= $_POST["password"];
+			$_SESSION["passwordconfirmation"]= $_POST["passwordconfirmation"];
+			$_SESSION["fullname"]= $_POST["fullname"];
+			$_SESSION["email"]= $_POST["email"];
+			if(strlen($_POST["number"]) > 0){
+				$_SESSION["number"]= $_POST["number"];
+			}
+		}
+		else if( strlen($_POST["number"]) > 0 && strlen($_POST["number"]) != 10 ){
+			$_SESSION["error"] = "Enter a valid number.";
+			$_SESSION["username"]= $_POST["username"];
+			$_SESSION["password"]= $_POST["password"];
+			$_SESSION["passwordconfirmation"]= $_POST["passwordconfirmation"];
+			$_SESSION["fullname"]= $_POST["fullname"];
+			$_SESSION["email"]= $_POST["email"];
+			$_SESSION["number"]= $_POST["number"];
+		}
+		else{
+			$_SESSION["username"]= $_POST["username"];
+			$_SESSION["password"]= $_POST["password"];
+			$_SESSION["passwordconfirmation"]= $_POST["passwordconfirmation"];
+			$_SESSION["fullname"]= $_POST["fullname"];
+			$_SESSION["email"]= $_POST["email"];
+			$_SESSION["number"]= $_POST["number"];
+			
+			$stmt = $pdo->prepare("SELECT username FROM accounts WHERE username= :username");
+			$stmt -> execute(array(":username" => $_POST['username']));
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			if($row !== false){
+				$_SESSION['error'] = 'User name '.'"'.$_POST["username"] .'"'.' has already been taken.Try another name.';
+				header('Location: signup.php');
+				return;
+			
+			}
+			
+		
+		
+			
+			$salt = 'XyZzy12*_';
+			$storage_password =  hash('md5', $salt.$_POST['password']);
+			$sql = "INSERT INTO accounts (fullname,username, password, email,number,date,time,meridiem) VALUES (:fullname,:username ,:password, :email,:number,:creationdate,:creationtime,:meridiem)";
+			
+			$stmt = $pdo->prepare($sql);
+			
+			$stmt->execute(array(
+			':fullname' => htmlentities($_POST['fullname']),
+			':username' => htmlentities($_POST['username']),
+			':password' => $storage_password,
+			':email' => htmlentities($_POST['email']),
+			':number' => htmlentities($_POST["number"]),
+			':creationdate' => $_POST["creationdate"],
+			':creationtime' => $_POST["creationtime"],
+			':meridiem' => $_POST['meridiem']
+			));
+			
+			$stmt = $pdo->query("SELECT fullname,username, password, email,number,date,time,meridiem FROM accounts");
+			$_SESSION['rows']=$stmt->fetchAll(PDO::FETCH_ASSOC);
+			$_SESSION["success"] = "Account created successfully.";
+			
+			$stmt2 = $pdo->prepare("SELECT username,user_id FROM accounts WHERE username= :username");
+			$stmt2 -> execute(array(":username" => $_POST['username']));
+			$row2 = $stmt->fetch(PDO::FETCH_ASSOC);
+			$_SESSION['user_id'] = $row2['user_id'];
+			$_SESSION['username'] = $row2['username'];
+			
+			
+			
+			header("Location: signup.php");
+			return;
+		
+		}	
+	}
+	date_default_timezone_set('Asia/Kolkata');
+
 	if(!isset($_SESSION['fullname'])){
 		$_SESSION['fullname'] = "";
 	}
 	if(!isset($_SESSION['username'])){
-		$_SESSION['username'] = "";
+		//$_SESSION['username'] = "";
 	}
 	if(!isset($_SESSION['password'])){
 		$_SESSION['password'] = "";
@@ -54,7 +244,46 @@
 		<link rel="stylesheet" href="assets/css/board.css">
 	</head>
 	<body>
-
+		<!--Modal-->
+		<div id="loginModal" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-lg" role="content">
+				<!-- Modal content-->
+				<div class="modal-content">
+					
+					<div class="modal-header">
+							<h4 class="myModalLabel" >INFO</h4>
+						
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						
+					</div>
+					<div class="modal-body">
+						<div class="row container ">
+							
+								<div class="col-xs-12 col-md-12 ">
+								<?php
+									if( isset($_SESSION['error']) ){
+										echo "<p style='color:red;font-size:25px;'>".$_SESSION['error']."</p>";
+										//unset($_SESSION['error']);
+									}
+								?>
+								</div>
+								<div class="col-xs-12 col-md-12 ">	
+								<?php
+									if( isset($_SESSION['success']) ){
+										echo "<p style='color:green;font-size:25px;'>".$_SESSION['success']."</p>";
+										//unset($_SESSION['success']);
+									}
+								?>
+								</div>
+							
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
 		<!-- Header -->
 		<header>
 			<div class="container">
@@ -80,11 +309,6 @@
 						</button>
 
 					</div>
-					
-					
-
-					
-					
 				</nav>
 			</div>
 		</header>
@@ -103,7 +327,7 @@
 				</div>
 			</div>
 
-
+			
 			<!--Board selection-->
 			<div class="row boarddiv justify-content-center">
 				<div class="row container  justify-content-center">	
@@ -113,60 +337,65 @@
 						<div class="col-12 justify-content-center ">
 							<p style="text-align:center;font-weight:700;font-size:55px;color:#512DA8;">SIGN UP</p>
 						</div>
-						<form method="post" id="FeedBackForm" name="FeedBackForm" >
+						<form method="post" id="signupform" name="signupform" >
 							<div class="form-group row">
-								<label for="name" class="col-md-2 col-form-label">Full Name</label>
+								<label for="fullname" class="col-md-2 col-form-label">Full Name</label>
 								<div class="col-md-10">
-									<input type="text" class="form-control" id="username" name="username" placeholder="Name" value="<?=$_SESSION['fullname']?>">
+									<input type="text" class="form-control" id="fullname" name="fullname" placeholder="Full Name" value="<?=$_SESSION['fullname']?>">
 								</div>
 							</div>
 							
 							<div class="form-group row ">
-								<label for="name" class="col-md-2 col-form-label">User Name</label>
+								<label for="username" class="col-md-2 col-form-label">User Name</label>
 								<div class="col-md-10">
-									<input type="text" class="form-control" id="username" name="username" placeholder="Name" value="<?=$_SESSION['username']?>">
+									<input type="text" class="form-control" id="username" name="username" placeholder="User Name" value="<?=$_SESSION['username']?>">
 								</div>
 							</div>
 							
 							<div class="form-group row">
-								<label for="telnum" class="col-12 col-md-2 col-form-label">Mobile Number</label>
+								<label for="number" class="col-12 col-md-2 col-form-label">Mobile Number</label>
 								<div class="col-12 col-md-10">
-									<input type="tel" class="form-control" id="telnum" name="Number" placeholder="Tel. number  (optional)" value="<?=$_SESSION['number']?>">
+									<input type="tel" class="form-control" id="number" name="number" placeholder="Mobile Number  (optional)" value="<?=$_SESSION['number']?>">
 								</div>
 							</div>
 							<div class="form-group row">
 								<label for="emailid" class="col-md-2 col-form-label">Email Id</label>
 								<div class="col-md-10">
-									<input type="email" class="form-control" id="emailid" name="EmailId" placeholder="Email  (optional)" value="<?=$_SESSION['emailid']?>">
+									<input type="email" class="form-control" id="email" name="email" placeholder="Email  (optional)" value="<?=$_SESSION['emailid']?>">
 								</div>
 							</div>
 							
 							<div class="form-group row">
-								<label for="name" class="col-md-2 col-form-label">Password</label>
+								<label for="password" class="col-md-2 col-form-label">Password</label>
 								<div class="col-md-10">
-									<input type="text" class="form-control" id="username" name="username" placeholder="Name" value="<?=$_SESSION['password']?>">
+									<input type="text" class="form-control" id="password" name="password" placeholder="Password" value="<?=$_SESSION['password']?>">
 								</div>
 							</div>
 							
 							<div class="form-group row">
-								<label for="name" class="col-md-2 col-form-label">Password Confirmation</label>
+								<label for="passwordconfirmation" class="col-md-2 col-form-label">Password Confirmation</label>
 								<div class="col-md-10">
-									<input type="text" class="form-control" id="username" name="username" placeholder="Name" value="<?=$_SESSION['passwordconfirmation']?>">
+									<input type="text" class="form-control" id="passwordconfirmation" name="passwordconfirmation" placeholder="Password Confirmation" value="<?=$_SESSION['passwordconfirmation']?>">
 								</div>
 							</div>
 							
+							<?php 
+							//$_SESSION['user_id'] = "90";
+							echo "<p>".$_SESSION['user_id']."hello</p>"; 
+							echo "<p>".$_SESSION['username']."</p>";
 							
+							?>
 							<div class="form-group row ml-auto">
 								<div class="offset-md-2 col-md-10 ">
 									<button type="submit" class="btn mybutton " name="send" id="send" style="float:right;" >SIGN UP</button>
 								</div>
 							</div>
 							
-							<input type="date" value="<?php echo date('Y-m-d');?>" name="Date" id="creationdate" hidden>
+							<input type="date" value="<?php echo date('Y-m-d');?>" name="creationdate" id="creationdate" hidden>
 						
-							<input type="time" id="creationtime" name="Time" value="<?php echo date('h:i:s');?>"  hidden>
+							<input type="time" id="creationtime" name="creationtime" value="<?php echo date('h:i:s');?>"  hidden>
 						
-							<input type="text" name="Meridiem" id="ampm" value="<?php echo date('A');?>" hidden>
+							<input type="text" name="meridiem" id="meridiem" value="<?php echo date('A');?>" hidden>
 							
 						</form>
 					</div>
@@ -226,5 +455,29 @@
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 		<script src="assets/js/popper.min.js"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/modal.js"></script>
+		<?php
+			if( isset($_SESSION['error']) ){
+				echo "
+				<script>
+					function toggle(){
+						$('#loginModal').modal('show');
+					}
+					toggle() 
+				</script>";
+				unset($_SESSION['error']);
+				
+			}
+			else if( isset($_SESSION['success']) ){
+				echo "
+				<script>
+					function toggle(){
+						$('#loginModal').modal('show');
+					}
+					toggle() 
+				</script>";
+				unset($_SESSION['success']);
+			}
+		?>	
 	</body>
 </html>

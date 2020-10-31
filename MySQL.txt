@@ -1,0 +1,9 @@
+CREATE TABLE discussions (
+    discussion_id int NOT NULL AUTO_INCREMENT,
+    
+    user_id int NOT NULL,
+    PRIMARY KEY (discussion_id),
+	topic VARCHAR(255),
+	discussion VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES accounts(user_id)
+);

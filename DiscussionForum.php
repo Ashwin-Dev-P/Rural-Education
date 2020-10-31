@@ -1,7 +1,127 @@
 <?php
+	ini_set('display_errors',1);
+	ini_set('log_errors',1);
+	ini_set('error_log',dirname(__FILE__).'/log.txt');
+	error_reporting(E_ALL);
 	session_start();
-	if(!isset($_SESSION['fullname'])){
-		$_SESSION['fullname'] = "";
+	require_once "pdo.php";
+	$salt = 'XyZzy12*_';
+	$stored_hash = 'ac7cc39c493be9ccbd7548984d90185e';
+
+	
+
+	//This if statement won't get executed on opening this webpage the first time.It runs when the login button is pressed.
+	if (isset($_POST['username']) && isset($_POST['password'])) {
+		if( strlen($_POST['password']) < 1 && strlen($_POST['username']) < 1 ){
+			$_SESSION['error'] = "Username and Password is required";
+			header("Location: DiscussionForum.php");
+			return;
+		}
+		else if (strlen($_POST['username']) < 1 ) {
+			$_SESSION["password"]= $_POST["password"];
+			$_SESSION['error'] = "Username is required";
+			header("Location: DiscussionForum.php");
+			return;
+		}
+		else if( strlen($_POST['password']) < 1  ){
+			$_SESSION["username"]= $_POST["username"];
+			$_SESSION['error'] = "Password is required";
+			header("Location: DiscussionForum.php");
+			return;
+		}
+		else {
+			//The username and password entered by the user will be stored in session even before validating them.
+			//So that it can be displayed for them to correct even if it is wrong. 
+			$_SESSION["username"]= $_POST["username"];
+			$_SESSION["password"]= $_POST["password"];
+			
+			//For value
+			$_SESSION["usernamevalue"]= $_POST["username"];
+			$_SESSION["passwordvalue"]= $_POST["password"];
+		
+			$stmt = $pdo->prepare("SELECT username,password,user_id FROM accounts WHERE username= :username");
+			$stmt -> execute(array(":username" => $_POST['username']));
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		
+			if($row !== false){
+			
+				$RetrievedPasswordHash = $row["password"];
+				$check = hash('md5', $salt.$_POST['password']);
+				if ($check == $RetrievedPasswordHash) {
+					$_SESSION['user_id'] = $row['user_id'];
+					
+					$_SESSION['loggedin'] = "true";
+					error_log("Login success ".$_POST['username']);
+					$_SESSION['username'] = htmlentities($_POST['username']);
+					header("Location: DiscussionForum.php");
+					return;
+				} 
+				else {
+					$pass = $_POST['password'];
+				
+					$_SESSION['error'] = "Sorry, your password was incorrect. Please double-check your password.";
+					error_log(" || Login fail || account name =".$_POST['username']." || Password="." $pass"." || ");
+					header("Location: DiscussionForum.php");
+					return;
+				}
+			}
+			else{
+				$_SESSION["error"] = "The username you entered doesn't belong to an account. Please check your username and try again.";
+				header("Location: DiscussionForum.php");
+				return;
+			}
+	}
+	}
+	
+	if( isset($_POST['post']) && isset($_SESSION['user_id']) ){
+		$_POST['DiscussionTextArea'] = trim($_POST['DiscussionTextArea'],' ');
+		if( isset($_POST['topic']) && strlen($_POST['topic'])>0 ){
+			$_SESSION['topic'] = $_POST['topic'];
+			if( isset($_POST['DiscussionTextArea']) && strlen($_POST['DiscussionTextArea']) > 0 ){
+				//unset($_SESSION['username']);
+				
+				if( isset($_SESSION['username']) || strlen($_SESSION['username']) >= 1){
+					
+					$sql = "INSERT INTO discussions (user_id,topic, discussion) VALUES (:user_id,:topic,:discussion)";
+			
+					$stmt = $pdo->prepare($sql);
+					
+					$stmt->execute(array(
+						':user_id' => $_SESSION['user_id'],
+						':topic' => $_POST['topic'],
+						':discussion' => $_POST['DiscussionTextArea']
+					
+					));
+					$_SESSION['success'] = "Discussion posted.";
+				}
+			}
+			else{
+				$_SESSION['error'] = "Type your dicussion.";
+			}
+		}
+		else{
+			
+			if(isset($_POST['DiscussionTextArea']) && strlen($_POST['DiscussionTextArea']) > 0){
+				$_SESSION['DiscussionTextArea'] = $_POST['DiscussionTextArea'];
+			}
+			$_SESSION['error'] = "Type your topic of dicussion.";
+		}
+	}
+	else if(isset($_POST['post'])){
+		if(isset($_POST['DiscussionTextArea']) && strlen($_POST['DiscussionTextArea']) > 0){
+			$_SESSION['DiscussionTextArea'] = $_POST['DiscussionTextArea'];
+		}
+		if( isset($_POST['topic']) && strlen($_POST['topic'])>0 ){
+			$_SESSION['topic'] = $_POST['topic'];
+		}
+		$_SESSION['error'] = "Log in to continue";
+	}
+	
+	if(!isset($_SESSION['DiscussionTextArea'])){
+		$_SESSION['DiscussionTextArea'] = "";
+	}
+	if(!isset($_SESSION['topic'])){
+		$_SESSION['topic'] = "";
 	}
 	if(!isset($_SESSION['username'])){
 		$_SESSION['username'] = "";
@@ -9,16 +129,9 @@
 	if(!isset($_SESSION['password'])){
 		$_SESSION['password'] = "";
 	}
-	if(!isset($_SESSION['passwordconfirmation'])){
-		$_SESSION['passwordconfirmation'] = "";
+	if(!isset($_SESSION['error'])  && !isset($_SESSION['success']) ){
+		$_SESSION['success'] = "Log in to post discussions";
 	}
-	if(!isset($_SESSION['emailid'])){
-		$_SESSION['emailid'] = "";
-	}
-	if(!isset($_SESSION['number'])){
-		$_SESSION['number'] = "";
-	}
-
 ?>
 <!DOCTYPE html>
 <html lang = "en">
@@ -57,10 +170,50 @@
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/modal.js"></script>
+		
+		
 	</head>
 	<body>
 		
-		
+		<!--Error Modal-->
+		<div id="infomodal" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-lg" role="content">
+				<!-- Modal content-->
+				<div class="modal-content">
+					
+					<div class="modal-header">
+							<h4 class="myModalLabel" >INFO</h4>
+						
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						
+					</div>
+					<div class="modal-body">
+						<div class="row container ">
+							
+								<div class="col-xs-12 col-md-12 ">
+								<?php
+									if( isset($_SESSION['error']) ){
+										echo "<p style='color:red;font-size:25px;'>".$_SESSION['error']."</p>";
+										unset($_SESSION['error']);
+									}
+								?>
+								</div>
+								<div class="col-xs-12 col-md-12 ">	
+								<?php
+									if( isset($_SESSION['success']) ){
+										echo "<p style='color:green;font-size:25px;'>".$_SESSION['success']."</p>";
+										unset($_SESSION['success']);
+									}
+									
+								?>
+								</div>
+							
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
 		
 		<!-- Login  Modal-->
 		<div id="loginModal" class="modal fade" role="dialog">
@@ -79,40 +232,41 @@
 			   
 								<!--Sign In Form-->
 								<div class="col-12 ">
-									<form method="post" id="FeedBackForm" name="FeedBackForm" >
+									<form method="post" id="loginform" name="loginform" >
 										
 										<div class="container">
-										<div class="form-group row ">
-											<label for="name" class="col-md-2 col-form-label">User Name</label>
-											<div class="col-md-10">
-												<input type="text" class="form-control" id="username" name="username" placeholder="Name" value="<?=$_SESSION['username']?>">
-											</div>
-										</div>
-										
-										
-										<div class="form-group row">
-											<label for="name" class="col-md-2 col-form-label">Password</label>
-											<div class="col-md-10">
-												<input type="password" class="form-control" id="username" name="username" placeholder="password" value="<?=$_SESSION['password']?>">
-											</div>
-										</div>
-										
-										
-										
-										<div class="form-group row-container">
-											<div style="float:left;">
-											<div class="col-xs-6 ">
-												<button type="button" class="btn btn-secondary" name="cancel" id="cancel" data-dismiss="modal">Cancel</button>
-											</div>
+											<div class="form-group row ">
+												<label for="name" class="col-md-2 col-form-label">User Name</label>
+												<div class="col-md-10">
+													
+													<input type="text" class="form-control" id="username" name="username" placeholder="Name" value="<?=$_SESSION['username']?>">
+												</div>
 											</div>
 											
-											<div class="ml-auto">
-											<div class="col-xs-6 ">
-												<button type="submit" class="btn btn-primary " name="login" id="login" style="float:right;" >Login</button>
-											</div>
+											
+											<div class="form-group row">
+												<label for="name" class="col-md-2 col-form-label">Password</label>
+												<div class="col-md-10">
+													<input type="password" class="form-control" id="password" name="password" placeholder="password" value="<?=$_SESSION['password']?>">
+												</div>
 											</div>
 											
-										</div>
+											
+											
+											<div class="form-group row-container">
+												<div style="float:left;">
+												<div class="col-xs-6 ">
+													<button type="button" class="btn btn-secondary" name="cancel" id="cancel" data-dismiss="modal">Cancel</button>
+												</div>
+												</div>
+												
+												<div class="ml-auto">
+												<div class="col-xs-6 ">
+													<button type="submit" class="btn btn-primary " name="login" id="login" style="float:right;" >Login</button>
+												</div>
+												</div>
+												
+											</div>
 										</div>
 										
 
@@ -136,20 +290,25 @@
 				
 				
 					if( isset($_POST['DiscussionTextArea']) && strlen($_POST['DiscussionTextArea']) > 0 ){
-						
-						if( strlen($_SESSION['username']) < 1){
-							//echo "<script>togglelogin();</script>";
-							echo strlen($_POST['DiscussionTextArea']);
+						//unset($_SESSION['username']);
+						if( !isset($_SESSION['username']) || strlen($_SESSION['username']) < 1){
+							echo "<script>togglelogin();</script>";
 						}
 						else{
-							$_SESSION['success'] = "Discussion posted.";
+							//$_SESSION['success'] = "Discussion posted.";
+							echo "<script>toggleinfo();</script>";
 						}
 					}
 					else{
-						
-						$_SESSION['error'] = "Type your topic of dicussion.";
+						//$_SESSION['error'] = "Type your topic of dicussion.";
+						echo "<script>toggleinfo();</script>";
 					}
 				
+			}
+			
+			if(!isset($_SESSION['loggedin']) ){
+				
+				echo "<script>toggleinfo();</script>";
 			}
 			
 			
@@ -172,12 +331,15 @@
 								<li class="nav-item"><a class="nav-link" href="./aboutus.html"><span class="fa fa-info fa-lg"></span> About Us</a></li>
 								<li class="nav-item"><a class="nav-link" href="./contactus.php"><span class="fa fa-address-card fa-lg"></span> Contact Us</a></li>
 								<?php
-									if( strlen($_SESSION['username']) < 1 ){
+									
+									if( !isset($_SESSION['loggedin']) || (!isset($_SESSION['username']) || strlen($_SESSION['username']) < 1) ){
 										echo "<li class='nav-item'><a   class='nav-link' onclick='togglelogin();'><span class='fa fa-sign-in fa-lg'></span> Log In</a></li>";
 									}
 									else{
 										echo "<li class='nav-item'><a   class='nav-link' href='#'>".$_SESSION['username']."</a></li>";
 									}
+									
+									
 								?>
 							</ul>
 							
@@ -205,6 +367,9 @@
 					</ol>
 				</div>
 			</div>
+			<?= $_SESSION['user_id'] ?>
+
+
 			
 			<div class="card">
 			<div class="col-12">
@@ -217,12 +382,17 @@
 					
 					
 					
-					
+					<div class="form-group row ">
+						<label for="topic" class="col-12 col-form-label">Topic</label>
+						<div class="col-12">
+							<input type="text" class="form-control" id="topic" name="topic" value='<?=$_SESSION['topic']?>'></input>
+						</div>
+					</div>
 					
 					<div class="form-group row ">
 						<label for="DiscussionTextArea" class="col-12 col-form-label">Your Discussion or Doubts</label>
 						<div class="col-12">
-							<textarea class="form-control" id="DiscussionTextArea" name="DiscussionTextArea" rows="6" ></textarea>
+							<textarea class="form-control" id="DiscussionTextArea" name="DiscussionTextArea" rows="6" ><?=$_SESSION['DiscussionTextArea']?></textarea>
 						</div>
 					</div>
 					<div class="form-group row ">
@@ -288,7 +458,29 @@
 		
 		
 		<script src="assets/js/popper.min.js"></script>
-		
+		<?php
+			if( isset($_SESSION['error']) ){
+				echo "
+				<script>
+					function toggleinfo(){
+						$('#infomodal').modal('show');
+					}
+					toggleinfo(); 
+				</script>";
+				//unset($_SESSION['error']);
+				
+			}
+			else if( isset($_SESSION['success']) ){
+				echo "
+				<script>
+					function toggleinfo(){
+						$('#infomodal').modal('show');
+					}
+					toggleinfo(); 
+				</script>";
+				//unset($_SESSION['success']);
+			}
+		?>
 		
 		
 	</body>

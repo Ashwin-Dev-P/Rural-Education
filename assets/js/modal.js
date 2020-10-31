@@ -17,6 +17,11 @@ function togglelogin(){
 	$('#loginModal').modal('toggle');
 	
 }
+function toggleinfo(){
+	$('#infomodal').modal('toggle');
+	
+}
+
 
 
 
