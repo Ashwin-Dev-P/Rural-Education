@@ -379,12 +379,6 @@
 								</div>
 							</div>
 							
-							<?php 
-							//$_SESSION['user_id'] = "90";
-							echo "<p>".$_SESSION['user_id']."hello</p>"; 
-							echo "<p>".$_SESSION['username']."</p>";
-							
-							?>
 							<div class="form-group row ml-auto">
 								<div class="offset-md-2 col-md-10 ">
 									<button type="submit" class="btn mybutton " name="send" id="send" style="float:right;" >SIGN UP</button>

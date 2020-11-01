@@ -4,9 +4,10 @@
 
 .row-content {
   margin: 0px auto;
-  padding: 50px 0px;
+ /* padding: 10px 0px;*/
+  /*padding-bottom: min(500px, 5%);*/
   border-bottom: 1px ridge;
-  min-height: 400px; }
+  min-height: 20px; }
 
 
 
@@ -23,7 +24,9 @@ address {
 
 body {
   padding: 50px 0px 0px 0px;
-  z-index: 0; }
+  z-index: 0; 
+  background-color:#E9E7E9 ;
+  }
 
 .navbar-dark {
   background-color: #512DA8; }
@@ -97,6 +100,14 @@ body {
 .CardAnchor{
 	margin-left: 33%;
     width: 33%;
+}
+.card-header{
+	background-color:#9575CD;
+	color:floralwhite;
+}
+.card-footer{
+	background-color:#FFFFFF;
+	
 }
 .mybreadcrumbs{
 	margin-top: 10px;

@@ -1,3 +1,20 @@
+<?php
+	session_start();
+	require_once "pdo.php";
+	if( isset($_POST['replybutton']) ){
+		if(isset($_POST['reply']) && strlen($_POST['reply'])> 0){
+			$sql = "INSERT INTO discussions_reply (discussion_id,user_id, reply) VALUES (:discussion_id,:user_id ,:reply)";
+			
+			$stmt = $pdo->prepare($sql);
+			
+			$stmt->execute(array(
+				':discussion_id' => htmlentities($_GET['discussion_id']),
+				':user_id' => htmlentities($_SESSION['user_id']),
+				':reply' => htmlentities($_POST['reply'])
+			));
+		}
+	}
+?>
 <!DOCTYPE html>
 <html lang = "en">
 	<head>
@@ -29,7 +46,7 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 		<link rel="stylesheet" href="assets/css/styles.css">
-		<link rel="stylesheet" href="assets/css/board.css">
+		<link rel="stylesheet" href="assets/css/DiscussionForum.css">
 	</head>
 	<body>
 
@@ -56,6 +73,8 @@
 						<button class="navbar-toggler btn-sm" type="button" data-toggle="collapse" data-target="#Navbar">
 							<span class="navbar-toggler-icon"></span>
 						</button>
+						
+						
 
 					</div>
 					
@@ -84,75 +103,79 @@
 
 			<!--Board selection-->
 			<div class="row boarddiv">
-				<div class="col-sm-6 divhover">
-					<a href="Stateboard.html">
-						<div class="card " >
-							<img class="card-img-top" src="assets/img/StateBoardIcon2.png" alt="State Board" height="50px" width="50px">
-							<div class="card-body">
-								<h5 class="card-title">State Board</h5>
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<?php
+								$stmt = $pdo->query("SELECT user_id,topic,discussion FROM discussions WHERE discussion_id=".$_GET['discussion_id']);
+								
+								while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+									$stmt2 = $pdo->query("SELECT username FROM accounts WHERE user_id=".$row['user_id']);
+									while($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)){
+										echo "POSTED BY: ".$row2['username'];
+										echo "
+											</div>
+											<div class='card-body'>
+										";
+										echo "<h1 style='text-align:center;'>".$row['topic']."</h1>";
+										echo "<h5 style='text-align:center;'>".$row['discussion']."</h5><hr/>";
+										
+									}
+								}
+								
+								//For getting replies
+								$stmt3 = $pdo->query("SELECT user_id,discussion_reply_id,reply FROM discussions_reply WHERE discussion_id=".$_GET['discussion_id']);
+								while($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)){
+									
+									//For getting replier info.
+									$stmt4 = $pdo->query("SELECT username FROM accounts WHERE user_id=".$row3['user_id']);
+									echo "<div class='row container row-content col-12'>";
+									while($row4 = $stmt4->fetch(PDO::FETCH_ASSOC)){
+										echo "<div class='row-content'>
+												<div class='row'>
+													<p> ".$row3['reply']."</p><br/>
+												</div>
+												
+												<div class='row' style='float:right;>
+													<p style='float:right;'>-- ".$row4['username']."</p>
+												</div>
+											</div>";
+									}
+									echo "</div>";
+								}
+								
+							?>
+							
+						
+						</div>
+						<div class="card-footer">
+							<div class="col-12">
+								<form method="post" id="replyform" name="replyform" >
+									
+									
+									
+									
+									
+									<div class="form-group row ">
+										<label for="reply" class="col-12 col-form-label">Your Reply</label>
+										<div class="col-12">
+											<textarea class="form-control" id="reply" name="reply" rows="2" ><?=$_SESSION['DiscussionTextArea']?></textarea>
+										</div>
+									</div>
+									<div class="form-group row ">
+										<div class="col-12 ">
+											<button type="submit" class="btn btn-primary mybutton" name="replybutton" id="replybutton" style="float:right;" >REPLY</button>
+										</div>
+									</div>
+									
+									
+									
+								</form>
 							</div>
 						</div>
-					</a>
+					</div>
 				</div>
-					
-
-
-
-				<div class="col-sm-6 divhover">
-					<a href="NEET.html">
-						<div class="card " >
-							<img class="card-img-top" src="assets/img/NEETIcon.jpg" alt="NEET" height="50px" width="50px">
-							<div class="card-body">
-								<h5 class="card-title">NEET Preparation</h5>
-							</div>
-						</div>
-					</a>
-				</div>
-				
-				<div class="col-sm-6 divhover">
-					<a href="JEE.html">
-						<div class="card " >
-							<img class="card-img-top" src="assets/img/JEEIcon.png" alt="JEE" height="50px" width="50px">
-							<div class="card-body">
-								<h5 class="card-title">JEE Preparation</h5>
-							</div>
-						</div>
-					</a>
-				</div>
-				
-				<div class="col-sm-6 divhover">
-					<a href="Stateboard.html">
-						<div class="card " >
-							<img class="card-img-top" src="assets/img/job2.jpg" alt="job" height="50px" width="50px">
-							<div class="card-body">
-								<h5 class="card-title">Job Opportunities</h5>
-							</div>
-						</div>
-					</a>
-				</div>
-				
-				<div class="col-sm-6 divhover">
-					<a href="EducationalYoutubeChannels.html">
-						<div class="card " >
-							<img class="card-img-top" src="assets/img/YouTubeIcon.png" alt="job" height="50px" width="50px">
-							<div class="card-body">
-								<h5 class="card-title">Educational Youtube Channels</h5>
-							</div>
-						</div>
-					</a>
-				</div>
-				
-				<div class="col-sm-6 divhover">
-					<a href="OtherEducationalSites.html">
-						<div class="card " >
-							<img class="card-img-top" src="assets/img/OtherEducationalSites.png" alt="job" height="50px" width="50px">
-							<div class="card-body">
-								<h5 class="card-title">Other Educational sites</h5>
-							</div>
-						</div>
-					</a>
-				</div>
-					
+			</div>
 
 
 

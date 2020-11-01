@@ -367,7 +367,7 @@
 					</ol>
 				</div>
 			</div>
-			<?= $_SESSION['user_id'] ?>
+		
 
 
 			
@@ -397,7 +397,7 @@
 					</div>
 					<div class="form-group row ">
 						<div class="col-12 ">
-							<button type="submit" class="btn btn-primary" name="post" id="post" style="float:right;" >POST</button>
+							<button type="submit" class="btn btn-primary mybutton" name="post" id="post" style="float:right;" >POST</button>
 						</div>
 					</div>
 					
@@ -409,6 +409,41 @@
 			</div>
 			</div>
 
+
+			<?php
+				$stmt3 = $pdo->query("SELECT discussion_id,user_id,topic,discussion FROM discussions ORDER BY discussion_id");
+				
+				
+				
+				
+				
+				$stmt5 = $pdo->query("SELECT discussion_id,user_id,topic,discussion FROM discussions ORDER BY discussion_id");
+				while ( $row5 = $stmt5->fetch(PDO::FETCH_ASSOC) ) {
+						$stmt4 = $pdo->query("SELECT username FROM accounts WHERE user_id=".$row5['user_id']);
+						echo "<div class='card ' >";
+						echo(" <div class='card-header'>");
+						//echo $stmt4;
+						while($row4 = $stmt4->fetch(PDO::FETCH_ASSOC)){
+							echo "POSTED BY:  ".$row4['username'];
+						}
+						echo "</div>";
+						echo(" <div class='card-body'>");
+						//echo($row5['discussion_id']);
+						
+						
+						echo "<h5 class='card-title'>".htmlentities($row5['topic'])."</h5>";
+						echo("<p class='card-text' style='text-align:center;'>".htmlentities($row5['discussion'])."</p> ");
+						
+						//echo();
+						echo "</div>";
+						
+						echo(" <div class='card-footer '>");
+						echo "<a class='btn btn-primary col-xs-3 col-md-1 mybutton' style='float:right;' href='./discussion.php?discussion_id=".$row5['discussion_id']."'>Enter</a>";
+						echo "</div>";
+						echo("</div>");
+					}
+				
+			?>
 			
 
 

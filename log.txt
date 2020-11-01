@@ -126,3 +126,8 @@ Stack trace:
 [31-Oct-2020 20:31:37 Europe/Berlin]  || Login fail || account name =Ashwindev || Password= aSHWIN@14 || 
 [31-Oct-2020 20:31:37 Europe/Berlin] PHP Notice:  Undefined index: user_id in C:\XAMPP\htdocs\myfiles\mywork\Rural Education\DiscussionForum.php on line 370
 [31-Oct-2020 20:31:46 Europe/Berlin] Login success Ashwindev
+[01-Nov-2020 09:04:14 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type PDOStatement as array in C:\XAMPP\htdocs\myfiles\mywork\Rural Education\DiscussionForum.php:438
+Stack trace:
+#0 {main}
+  thrown in C:\XAMPP\htdocs\myfiles\mywork\Rural Education\DiscussionForum.php on line 438
+[01-Nov-2020 09:05:00 Europe/Berlin] PHP Recoverable fatal error:  Object of class PDOStatement could not be converted to string in C:\XAMPP\htdocs\myfiles\mywork\Rural Education\DiscussionForum.php on line 438
