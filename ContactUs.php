@@ -304,11 +304,9 @@
 					<!--Social Media-->
 					<div class="col-12 col-sm-4 align-self-center">
 						<div class="text-center">
-							
 							<a class="btn btn-social-icon btn-linkedin" href="https://www.linkedin.com/in/ashwindev14/" target="_blank"><i class="fa fa-linkedin"></i></a>
-							
-							<a class="btn btn-social-icon" href="mailto:ashwindev1462001@gmail.com"><i class="fa fa-envelope-o"></i></a>
-							<a class="btn btn-social-icon" href="tel:805-615-0426"><i class="fa fa-phone fa-lg" aria-hidden="true" style="font-size:40px;"></i></a>
+							<a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o"></i></a>
+							<a class="btn btn-social-icon" href="tel:"><i class="fa fa-phone fa-lg" aria-hidden="true" style="font-size:40px;"></i></a>
 							<a href="whatsapp://send?abid=phonenumber&text=Hello%2C%20World!" style="color: #25d366;"><i class="fa fa-whatsapp green-color " aria-hidden="true" style="font-size:40px"></i></a>
 						</div>
 					</div>
