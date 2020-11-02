@@ -9,9 +9,16 @@ change logo to EducationForEveryone.
 common pdfs such as tamil and english are not displayed in english medium.
 
 
-feedback Database table;
 
 Review database table
 	Used to view comments of site users.
 
 Add password and username when creating database.
+
+
+remove phone number and whatsapp
+
+
+Bharath Kumar photo in aboutus
+
+TNPSEC sites

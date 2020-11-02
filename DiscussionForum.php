@@ -340,7 +340,7 @@
 								<div class="dropdown">
 									<a class="nav-item"><a class="nav-link">
 										<?php
-											if( isset($_SESSION['username']) && strlen($_SESSION['username'])>0 ){
+											if( isset($_SESSION['user_id']) && strlen($_SESSION['user_id'])>0 ){
 												echo $_SESSION['username'];
 											}
 											else{
@@ -355,7 +355,7 @@
 											if(!isset($_SESSION['user_id']) || strlen($_SESSION['user_id']) <1 ){
 												echo "
 												<li class='nav-item '><a class='mydropdownitem' href='SignUp.php'>Sign Up</a></li>
-												<li class='nav-item '><a class='mydropdownitem' href='Login.php'>Log In</a></li>
+												<li class='nav-item '><a onclick='togglelogin();return false;' class='mydropdownitem' href='Login.php'>Log In</a></li>
 												";
 											}
 										?>

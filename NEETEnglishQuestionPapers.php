@@ -124,7 +124,7 @@
 				<div class="col-12">
 					<ol class="col-12 breadcrumb">
 						<li class="breadcrumb-item"><a href="./index.php">Home</a></li>
-						<li class="breadcrumb-item"><a href="./Board.html">Board</a></li>
+						<li class="breadcrumb-item"><a href="./Board.php">Board</a></li>
 						<li class="breadcrumb-item"><a href="./NEET.html">NEET</a></li>
 						<li class="breadcrumb-item"><a href="./NEETEnglish.html">English</a></li>
 						<li class="breadcrumb-item active">QuestionPapers</li>

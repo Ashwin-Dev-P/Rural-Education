@@ -57,7 +57,7 @@
 								<div class="dropdown">
 									<a class="nav-item"><a class="nav-link">
 										<?php
-											if( isset($_SESSION['username']) && strlen($_SESSION['username'])>0 ){
+											if( isset($_SESSION['user_id']) && strlen($_SESSION['user_id'])>0 ){
 												echo $_SESSION['username'];
 											}
 											else{
@@ -162,7 +162,7 @@
 				</div>
 				
 				<div class="col-sm-6 divhover">
-					<a href="Stateboard.html">
+					<a href="jobopportunities.html">
 						<div class="card " >
 							<img class="card-img-top" src="assets/img/job2.jpg" alt="job" height="50px" width="50px">
 							<div class="card-body">

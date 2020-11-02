@@ -1,22 +1,23 @@
 <?php
 	session_start();
 	require_once "pdo.php";
+	$salt = 'XyZzy12*_';
 	if (isset($_POST['username']) && isset($_POST['password'])) {
 		if( strlen($_POST['password']) < 1 && strlen($_POST['username']) < 1 ){
 			$_SESSION['error'] = "Username and Password is required";
-			header("Location: DiscussionForum.php");
+			header("Location: login.php");
 			return;
 		}
 		else if (strlen($_POST['username']) < 1 ) {
 			$_SESSION["password"]= $_POST["password"];
 			$_SESSION['error'] = "Username is required";
-			header("Location: DiscussionForum.php");
+			header("Location: login.php");
 			return;
 		}
 		else if( strlen($_POST['password']) < 1  ){
 			$_SESSION["username"]= $_POST["username"];
 			$_SESSION['error'] = "Password is required";
-			header("Location: DiscussionForum.php");
+			header("Location: login.php");
 			return;
 		}
 		else {
@@ -44,7 +45,7 @@
 					error_log("Login success ".$_POST['username']);
 					$_SESSION['username'] = htmlentities($_POST['username']);
 					$_SESSION['success'] = "Logged In.";
-					header("Location: DiscussionForum.php");
+					header("Location: index.php");
 					return;
 				} 
 				else {
@@ -52,13 +53,13 @@
 				
 					$_SESSION['error'] = "Sorry, your password was incorrect. Please double-check your password.";
 					error_log(" || Login fail || account name =".$_POST['username']." || Password="." $pass"." || ");
-					header("Location: DiscussionForum.php");
+					header("Location: login.php");
 					return;
 				}
 			}
 			else{
 				$_SESSION["error"] = "The username you entered doesn't belong to an account. Please check your username and try again.";
-				header("Location: DiscussionForum.php");
+				header("Location: login.php");
 				return;
 			}
 	}
@@ -192,7 +193,7 @@
 			<div class="row row-container mybreadcrumbs"> 
 				<div class="col-12">
 					<ol class="col-12 breadcrumb">
-						<li class="breadcrumb-item"><a href="./index.html">Home</a></li>
+						<li class="breadcrumb-item"><a href="./index.php">Home</a></li>
 						<li class="breadcrumb-item active">Login</li>
 					</ol>
 				</div>

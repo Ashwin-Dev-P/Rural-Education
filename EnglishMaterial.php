@@ -87,7 +87,7 @@
 				<div class="col-12">
 					<ol class="col-12 breadcrumb">
 						<li class="breadcrumb-item"><a href="./index.php">Home</a></li>
-						<li class="breadcrumb-item"><a href="./Board.html">Board</a></li>
+						<li class="breadcrumb-item"><a href="./Board.php">Board</a></li>
 						<li class="breadcrumb-item"><a href="./StateBoard.html">State Board</a></li>
 						<li class="breadcrumb-item"><a href="./StateBoardEnglish.html">English</a></li>
 						<li class="breadcrumb-item"><a href="./StateBoardEnglish<?=$_GET['content']?>.html"><?=$_GET['content']?></a></li>
@@ -120,7 +120,9 @@
 									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard5/";
 									break;
 								case 6:
-									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard6/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1nghV70y74KkrGx-RuYmDSK7wZRWmzWB-#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 7:
 									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard7/";

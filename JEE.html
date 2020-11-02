@@ -76,11 +76,8 @@
 				<div class="col-12">
 					<ol class="col-12 breadcrumb">
 						<li class="breadcrumb-item"><a href="./index.php">Home</a></li>
-						<li class="breadcrumb-item"><a href="./Board.html">Board</a></li>
-						<li class="breadcrumb-item"><a href="./NEET.html">NEET</a></li>
-						<li class="breadcrumb-item"><a href="./NEETTamil.html">Tamil</a></li>
-						<li class="breadcrumb-item"><a href="./NEETTamil<?=$_GET['content']?>.html"><?=$_GET['content']?></a></li>
-						<li class="breadcrumb-item active">Standard <?=$_GET['standard']?></li>
+						<li class="breadcrumb-item"><a href="./Board.php">Board</a></li>
+						<li class="breadcrumb-item active">JEE</li>
 					</ol>
 				</div>
 			</div>
@@ -88,98 +85,33 @@
 
 			<!--Board selection-->
 			<div class="row boarddiv">
-				<?php
+				<div class="col-12">
+					<h1 id="ChooseLanguage">Select a language medium</h1>
+				</div>
+				<div class="col-sm-6 divhover">
+					<a href="JEETamil.html">
+						<div class="card " >
+							<img class="card-img-top" src="assets/img/TamilIcon2.jpg" alt="Tamil Medium"  >
+							<div class="card-body">
+								<h5 class="card-title">Tamil</h5>
+							</div>
+						</div>
+					</a>
+				</div>
 					
-					if( $_GET['content'] == "StudyMaterial"){
-						switch($_GET['standard']) {
-							case 1:
-								echo "Standard1";
-								break;
-							case 2:
-								echo "Standard2";
-								break;
-							case 3:
-								echo "Standard3";
-								break;
-							case 4:
-								echo "Standard4";
-								break;
-							case 5:
-								echo "Standard5";
-								break;
-							case 6:
-								echo "Standard6";
-								break;
-							case 7:
-								echo "Standard7";
-								break;
-							case 8:
-								echo "Standard8";
-								break;
-							case 9:
-								echo "Standard9";
-								break;
-							case 10:
-								echo "Standard10";
-								break;
-							case 11:
-								echo "Standard11";
-								break;
-							case 12:
-								echo "Standard12";
-								break;
-							default:
-								echo "Invalid Standard.";
-						}
-						
-					}
-					else if( $_GET['content'] == "QuestionPapers" ){
-						
-						switch($_GET['standard']) {
-							case 1:
-								echo "Standard1";
-								break;
-							case 2:
-								echo "Standard2";
-								break;
-							case 3:
-								echo "Standard3";
-								break;
-							case 4:
-								echo "Standard4";
-								break;
-							case 5:
-								echo "Standard5";
-								break;
-							case 6:
-								echo "Standard6";
-								break;
-							case 7:
-								echo "Standard7";
-								break;
-							case 8:
-								echo "Standard8";
-								break;
-							case 9:
-								echo "Standard9";
-								break;
-							case 10:
-								echo "Standard10";
-								break;
-							case 11:
-								echo "Standard11";
-								break;
-							case 12:
-								echo "Standard12";
-								break;
-							default:
-								echo "Invalid Standard.";
-						}
-					}
-					else{
-						echo "Invalid GET parameters in Content.";
-					}
-				?>
+
+
+
+				<div class="col-sm-6 divhover">
+					<a href="JEEEnglish.html">
+						<div class="card " >
+							<img class="card-img-top" src="assets/img/EnglishIcon2.jpg" alt="English Medium"  >
+							<div class="card-body">
+								<h5 class="card-title">English</h5>
+							</div>
+						</div>
+					</a>
+				</div>
 
 			</div>
 

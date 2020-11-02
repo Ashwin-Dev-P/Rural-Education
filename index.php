@@ -56,11 +56,11 @@
 							<div class="dropdown">
 									<a class="nav-item"><a class="nav-link">
 										<?php
-											if( isset($_SESSION['username']) && strlen($_SESSION['username'])>0 ){
-												echo $_SESSION['username'];
+											if( isset($_SESSION['user_id']) && strlen($_SESSION['user_id'])>0 ){
+												echo "<i class='fa fa-user' aria-hidden='true'></i>".$_SESSION['username'];
 											}
 											else{
-												echo "My Account";
+												echo "<i class='fa fa-user' aria-hidden='true'></i>"."My Account";
 											}
 										?>
 										

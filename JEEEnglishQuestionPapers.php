@@ -1,3 +1,50 @@
+<?php
+					
+						
+						
+						
+						
+							
+
+				// open this directory 
+				
+				function GenerateContents($path){
+				$myDirectory = opendir($path);
+							while($entryName = readdir($myDirectory)) {
+								$dirArray[] = $entryName;
+							}
+							closedir($myDirectory);
+							
+							
+							$indexCount	= count($dirArray);
+							if($indexCount == 2){
+								echo "
+										<li class='list-group-item list-group-item-action standardlist col-xs-12 col-md-9 col-lg-8'>
+											<div class='col-xs-12 PDFnames'>No Content Available</div>
+										</li>
+									";
+							}
+							else{
+								echo "<ul class='col-xs-12 col-md-12'>";
+								for($index=0; $index < $indexCount; $index++) {
+									$extension = substr($dirArray[$index], -3);
+									if ($extension == 'pdf'){ // list only jpgs
+										echo "
+											<li class='list-group-item list-group-item-action standardlist '>
+												<div class='col-xs-12 PDFnames'>".substr($dirArray[$index],0,-4)."</div>
+												<div class='pdfAction col-xs-12'>
+													<a href='".$path.$dirArray[$index]."' target='_blank'>View</a> |
+													<a href='download.php?file=".$path.$dirArray[$index]."'>Download</a>
+												</div>
+											</li>
+										";
+									}	
+								}
+								echo "</ul>";
+							}
+				}
+					
+					?>
 <!DOCTYPE html>
 <html lang = "en">
 	<head>
@@ -78,9 +125,9 @@
 					<ol class="col-12 breadcrumb">
 						<li class="breadcrumb-item"><a href="./index.php">Home</a></li>
 						<li class="breadcrumb-item"><a href="./Board.php">Board</a></li>
-						<li class="breadcrumb-item"><a href="./NEET.html">NEET</a></li>
-						<li class="breadcrumb-item"><a href="./NEETTamil.html">Tamil</a></li>
-						<li class="breadcrumb-item active">StudyMaterial</li>
+						<li class="breadcrumb-item"><a href="./JEE.html">JEE</a></li>
+						<li class="breadcrumb-item"><a href="./JEEEnglish.html">English</a></li>
+						<li class="breadcrumb-item active">QuestionPapers</li>
 					</ol>
 				</div>
 			</div>
@@ -92,32 +139,71 @@
 					
 					<!--Biology-->
 					<ul class="list-group">
-						<li class="list-group-item list-group-item-action standardlist listtopic" data-toggle="collapse" data-target="#demo">Biology</li>
+						<li class="list-group-item list-group-item-action standardlist listtopic" data-toggle="collapse" data-target="#year2020">2020</li>
 					</ul>
-					<div id="demo" class="collapse">
-						<li class="list-group-item list-group-item-action standardlist"><div class="pdfAction col-xs-12">pdf links here.</div><div class="pdfAction col-xs-12"><a href="assets/pdf/sample.pdf" target="_blank">View</a> | <a href="download.php?file=sample">Download</a></div></li>
+					<div id="year2020" class="collapse">
+						
+						<?php
+							$path1 = "assets/pdf/NEET/English/QuestionPapers/2020/";
+							GenerateContents($path1);
+						?>
 					</div> 
 					
 					<!--Physics-->
 					<ul class="list-group">
-						<li class="list-group-item list-group-item-action standardlist listtopic" data-toggle="collapse" data-target="#demo1">Physics</li>
+						<li class="list-group-item list-group-item-action standardlist listtopic" data-toggle="collapse" data-target="#year2019">2019</li>
 					</ul>
-					<div id="demo1" class="collapse">
-						<li class="list-group-item list-group-item-action standardlist"><div class="col-xs-12">pdf links here.</div><div class="pdfAction col-xs-12"><a href="assets/pdf/sample.pdf" target="_blank">View</a> | <a href="download.php?file=sample">Download</a></div></li>
+					<div id="year2019" class="collapse">
+						<?php
+							$path1 = "assets/pdf/NEET/English/QuestionPapers/2019/";
+							GenerateContents($path1);
+						?>
 					</div> 
 					
 					
 					<!--Chemistry-->
 					<ul class="list-group">
-						<li class="list-group-item list-group-item-action standardlist listtopic col-xs-12" data-toggle="collapse" data-target="#demo3">Chemistry</li>
+						<li class="list-group-item list-group-item-action standardlist listtopic col-xs-12" data-toggle="collapse" data-target="#year2017">2017</li>
 					</ul>
-					<div id="demo3" class="collapse">
-						<li class="list-group-item list-group-item-action standardlist row-container col-xs-12"><div class="col-xs-12">pdf links here.</div><div class="pdfAction col-xs-12"><a href="assets/pdf/sample.pdf" target="_blank">View</a> | <a href="download.php?file=sample">Download</a></div></li>
+					<div id="year2017" class="collapse">
+						<ul class="list-group ">
+							
+							<div class="col-sm-12">
+								<li class="list-group-item list-group-item-action standardlist listtopic sublisttopic col-xs-12" data-toggle="collapse" data-target="#QP2017">QuestionPapers</li>
+								<div id="QP2017" class="collapse">
+									<?php
+										$path1 = "assets/pdf/NEET/English/QuestionPapers/2017/Question/";
+										GenerateContents($path1);
+									?>
+								</div>
+								
+								<li class="list-group-item list-group-item-action standardlist listtopic sublisttopic col-xs-12" data-toggle="collapse" data-target="#AnswerKey2017">AnswerKey</li>
+								<div id="AnswerKey2017" class="collapse">
+									<?php
+										$path1 = "assets/pdf/NEET/English/QuestionPapers/2017/AnswerKey/";
+										GenerateContents($path1);
+									?>
+								</div>
+									
+								<li class="list-group-item list-group-item-action standardlist listtopic sublisttopic col-xs-12" data-toggle="collapse" data-target="#Solution2017">Solution</li>
+								<div id="Solution2017" class="collapse">								
+									<?php
+										$path1 = "assets/pdf/NEET/English/QuestionPapers/2017/Solution/";
+										GenerateContents($path1);
+									?>
+								</div>
+									
+									
+								
+							</div>
+							
+							
+						</ul>
 					</div> 
-				 
+					
 				</div>
 			</div>
-
+			
 
 		</div>
 		

@@ -79,7 +79,11 @@
 						<div class="row container ">
 							
 								<div class="col-xs-12 col-md-12 ">
+								
 								<?php
+									if( (!isset($_SESSION['error']) || strlen($_SESSION['error']) <1) && (!isset($_SESSION['success']) || strlen($_SESSION['success'])<1) ){
+										echo "<p style='font-size:25px;'>Enter your answer in the reply box.</p>";
+									}
 									if( isset($_SESSION['error']) ){
 										echo "<p style='color:red;font-size:25px;'>".$_SESSION['error']."</p>";
 										unset($_SESSION['error']);
@@ -219,7 +223,7 @@
 								<div class="dropdown">
 									<a class="nav-item"><a class="nav-link">
 										<?php
-											if( isset($_SESSION['username']) && strlen($_SESSION['username'])>0 ){
+											if( isset($_SESSION['user_id']) && strlen($_SESSION['user_id'])>0 ){
 												echo $_SESSION['username'];
 											}
 											else{
@@ -274,7 +278,7 @@
 
 
 			<!--Board selection-->
-			<div class="row boarddiv">
+			<div class="row boarddiv ">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
@@ -320,43 +324,31 @@
 							
 						
 						</div>
-						<div class="card-footer">
-							<div class="col-12">
-								<form method="post" id="replyform" name="replyform" >
-									
-									
-									
-									
-									
-									<div class="form-group row ">
-										<label for="reply" class="col-12 col-form-label">Your Reply</label>
-										<div class="col-12">
-											<textarea class="form-control" id="reply" name="reply" rows="2" ><?=$_SESSION['DiscussionTextArea']?></textarea>
-										</div>
-									</div>
-									<div class="form-group row ">
-										<div class="col-12 ">
-											<button type="submit" class="btn btn-primary mybutton" name="replybutton" id="replybutton" style="float:right;" >REPLY</button>
-										</div>
-									</div>
-									
-									
-									
-								</form>
-							</div>
-						</div>
+						
 					</div>
 				</div>
 			</div>
-
-
-
-				
-
+			<div class="card">
+				<div class="col-12">
+					<form method="post" id="replyform" name="replyform" >
+						<div class="form-group row ">
+							<label for="reply" class="col-12 col-form-label">Your Reply</label>
+							<div class="col-12">
+								<textarea class="form-control" id="reply" name="reply" rows="2" ><?=$_SESSION['DiscussionTextArea']?></textarea>
+							</div>
+						</div>
+						<div class="form-group row ">
+							<div class="col-12 ">
+								<button type="submit" class="btn btn-primary mybutton" name="replybutton" id="replybutton" style="float:right;" >REPLY</button>
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
-
-
 		</div>
+
+
+		
 		
 			
   
