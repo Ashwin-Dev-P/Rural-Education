@@ -78,8 +78,8 @@
 					<ol class="col-12 breadcrumb">
 						<li class="breadcrumb-item"><a href="./index.php">Home</a></li>
 						<li class="breadcrumb-item"><a href="./Board.php">Board</a></li>
-						<li class="breadcrumb-item"><a href="./NEET.html">NEET</a></li>
-						<li class="breadcrumb-item"><a href="./NEETTamil.html">Tamil</a></li>
+						<li class="breadcrumb-item"><a href="./JEE.html">JEE</a></li>
+						<li class="breadcrumb-item"><a href="./JEETamil.html">Tamil</a></li>
 						<li class="breadcrumb-item active">QuestionPapers</li>
 					</ol>
 				</div>
@@ -89,31 +89,12 @@
 			<!--Class selection-->
 			<div class="row  justify-content-md-center">
 				<div class="col-xs-12 col-md-8">
+					<?php
+						echo "
+							<iframe src='https://drive.google.com/embeddedfolderview?id=1i1etikY0z80szpD6n-xm4z5CIVDb0xrX#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+						";
+					?>
 					
-					<!--Biology-->
-					<ul class="list-group">
-						<li class="list-group-item list-group-item-action standardlist listtopic" data-toggle="collapse" data-target="#demo">Biology</li>
-					</ul>
-					<div id="demo" class="collapse">
-						<li class="list-group-item list-group-item-action standardlist"><div class="pdfAction col-xs-12">pdf links here.</div><div class="pdfAction col-xs-12"><a href="assets/pdf/sample.pdf" target="_blank">View</a> | <a href="download.php?file=sample">Download</a></div></li>
-					</div> 
-					
-					<!--Physics-->
-					<ul class="list-group">
-						<li class="list-group-item list-group-item-action standardlist listtopic" data-toggle="collapse" data-target="#demo1">Physics</li>
-					</ul>
-					<div id="demo1" class="collapse">
-						<li class="list-group-item list-group-item-action standardlist"><div class="col-xs-12">pdf links here.</div><div class="pdfAction col-xs-12"><a href="assets/pdf/sample.pdf" target="_blank">View</a> | <a href="download.php?file=sample">Download</a></div></li>
-					</div> 
-					
-					
-					<!--Chemistry-->
-					<ul class="list-group">
-						<li class="list-group-item list-group-item-action standardlist listtopic col-xs-12" data-toggle="collapse" data-target="#demo3">Chemistry</li>
-					</ul>
-					<div id="demo3" class="collapse">
-						<li class="list-group-item list-group-item-action standardlist row-container col-xs-12"><div class="col-xs-12">pdf links here.</div><div class="pdfAction col-xs-12"><a href="assets/pdf/sample.pdf" target="_blank">View</a> | <a href="download.php?file=sample">Download</a></div></li>
-					</div> 
 				 
 				</div>
 			</div>

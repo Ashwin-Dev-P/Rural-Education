@@ -375,9 +375,9 @@
 									$stmt4 = $pdo->query("SELECT username FROM accounts WHERE user_id=".$row3['user_id']);
 									echo "<div class='row container row-content col-12'>";
 									while($row4 = $stmt4->fetch(PDO::FETCH_ASSOC)){
-										echo "<div class='row-content'>
-												<div class='row'>
-													<p> ".$row3['reply']."</p><br/>
+										echo "<div class='row-content col-12'>
+												<div class='row justify-content-center'>
+													<p > ".$row3['reply']."</p><br/>
 												</div>
 												
 												<div class='row' style='float:right;>

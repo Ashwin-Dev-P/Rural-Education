@@ -92,10 +92,14 @@
 					
 					<!--Biology-->
 					<ul class="list-group">
-						<li class="list-group-item list-group-item-action standardlist listtopic" data-toggle="collapse" data-target="#demo">Biology</li>
+						<li class="list-group-item list-group-item-action standardlist listtopic" data-toggle="collapse" data-target="#demo">Maths</li>
 					</ul>
 					<div id="demo" class="collapse">
-						<li class="list-group-item list-group-item-action standardlist"><div class="pdfAction col-xs-12">pdf links here.</div><div class="pdfAction col-xs-12"><a href="assets/pdf/sample.pdf" target="_blank">View</a> | <a href="download.php?file=sample">Download</a></div></li>
+						<?php
+							echo "
+								<iframe src='https://drive.google.com/embeddedfolderview?id=1V_6Nt_0LEyh0_5EHUK5eEjX0-lCUOdAF#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+							";
+						?>
 					</div> 
 					
 					<!--Physics-->
@@ -103,7 +107,11 @@
 						<li class="list-group-item list-group-item-action standardlist listtopic" data-toggle="collapse" data-target="#demo1">Physics</li>
 					</ul>
 					<div id="demo1" class="collapse">
-						<li class="list-group-item list-group-item-action standardlist"><div class="col-xs-12">pdf links here.</div><div class="pdfAction col-xs-12"><a href="assets/pdf/sample.pdf" target="_blank">View</a> | <a href="download.php?file=sample">Download</a></div></li>
+						<?php
+							echo "
+								<iframe src='https://drive.google.com/embeddedfolderview?id=12NTTYvNqiVEbpvIoWFh9E0_NfQmEhgSy#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+							";
+						?>
 					</div> 
 					
 					
@@ -112,7 +120,11 @@
 						<li class="list-group-item list-group-item-action standardlist listtopic col-xs-12" data-toggle="collapse" data-target="#demo3">Chemistry</li>
 					</ul>
 					<div id="demo3" class="collapse">
-						<li class="list-group-item list-group-item-action standardlist row-container col-xs-12"><div class="col-xs-12">pdf links here.</div><div class="pdfAction col-xs-12"><a href="assets/pdf/sample.pdf" target="_blank">View</a> | <a href="download.php?file=sample">Download</a></div></li>
+						<?php
+							echo "
+								<iframe src='https://drive.google.com/embeddedfolderview?id=1JqhvtNXAfe4EPNWjRLOXXMmO8DVCM6Fn#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+							";
+						?>
 					</div> 
 				 
 				</div>

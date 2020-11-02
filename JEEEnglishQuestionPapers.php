@@ -1,50 +1,4 @@
-<?php
-					
-						
-						
-						
-						
-							
 
-				// open this directory 
-				
-				function GenerateContents($path){
-				$myDirectory = opendir($path);
-							while($entryName = readdir($myDirectory)) {
-								$dirArray[] = $entryName;
-							}
-							closedir($myDirectory);
-							
-							
-							$indexCount	= count($dirArray);
-							if($indexCount == 2){
-								echo "
-										<li class='list-group-item list-group-item-action standardlist col-xs-12 col-md-9 col-lg-8'>
-											<div class='col-xs-12 PDFnames'>No Content Available</div>
-										</li>
-									";
-							}
-							else{
-								echo "<ul class='col-xs-12 col-md-12'>";
-								for($index=0; $index < $indexCount; $index++) {
-									$extension = substr($dirArray[$index], -3);
-									if ($extension == 'pdf'){ // list only jpgs
-										echo "
-											<li class='list-group-item list-group-item-action standardlist '>
-												<div class='col-xs-12 PDFnames'>".substr($dirArray[$index],0,-4)."</div>
-												<div class='pdfAction col-xs-12'>
-													<a href='".$path.$dirArray[$index]."' target='_blank'>View</a> |
-													<a href='download.php?file=".$path.$dirArray[$index]."'>Download</a>
-												</div>
-											</li>
-										";
-									}	
-								}
-								echo "</ul>";
-							}
-				}
-					
-					?>
 <!DOCTYPE html>
 <html lang = "en">
 	<head>
@@ -137,69 +91,11 @@
 			<div class="row  justify-content-md-center">
 				<div class="col-xs-12 col-md-8">
 					
-					<!--Biology-->
-					<ul class="list-group">
-						<li class="list-group-item list-group-item-action standardlist listtopic" data-toggle="collapse" data-target="#year2020">2020</li>
-					</ul>
-					<div id="year2020" class="collapse">
-						
-						<?php
-							$path1 = "assets/pdf/NEET/English/QuestionPapers/2020/";
-							GenerateContents($path1);
-						?>
-					</div> 
-					
-					<!--Physics-->
-					<ul class="list-group">
-						<li class="list-group-item list-group-item-action standardlist listtopic" data-toggle="collapse" data-target="#year2019">2019</li>
-					</ul>
-					<div id="year2019" class="collapse">
-						<?php
-							$path1 = "assets/pdf/NEET/English/QuestionPapers/2019/";
-							GenerateContents($path1);
-						?>
-					</div> 
-					
-					
-					<!--Chemistry-->
-					<ul class="list-group">
-						<li class="list-group-item list-group-item-action standardlist listtopic col-xs-12" data-toggle="collapse" data-target="#year2017">2017</li>
-					</ul>
-					<div id="year2017" class="collapse">
-						<ul class="list-group ">
-							
-							<div class="col-sm-12">
-								<li class="list-group-item list-group-item-action standardlist listtopic sublisttopic col-xs-12" data-toggle="collapse" data-target="#QP2017">QuestionPapers</li>
-								<div id="QP2017" class="collapse">
-									<?php
-										$path1 = "assets/pdf/NEET/English/QuestionPapers/2017/Question/";
-										GenerateContents($path1);
-									?>
-								</div>
-								
-								<li class="list-group-item list-group-item-action standardlist listtopic sublisttopic col-xs-12" data-toggle="collapse" data-target="#AnswerKey2017">AnswerKey</li>
-								<div id="AnswerKey2017" class="collapse">
-									<?php
-										$path1 = "assets/pdf/NEET/English/QuestionPapers/2017/AnswerKey/";
-										GenerateContents($path1);
-									?>
-								</div>
-									
-								<li class="list-group-item list-group-item-action standardlist listtopic sublisttopic col-xs-12" data-toggle="collapse" data-target="#Solution2017">Solution</li>
-								<div id="Solution2017" class="collapse">								
-									<?php
-										$path1 = "assets/pdf/NEET/English/QuestionPapers/2017/Solution/";
-										GenerateContents($path1);
-									?>
-								</div>
-									
-									
-								
-							</div>
-							
-							
-						</ul>
-					</div> 
+					<?php
+						echo "
+							<iframe src='https://drive.google.com/embeddedfolderview?id=1HCr18RfJ2hVMZgorodww5a1Jn1x8l5OU#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+						";
+					?>
 					
 				</div>
 			</div>
