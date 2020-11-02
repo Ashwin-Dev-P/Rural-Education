@@ -79,8 +79,8 @@
 						<li class="breadcrumb-item"><a href="./index.php">Home</a></li>
 						<li class="breadcrumb-item"><a href="./Board.php">Board</a></li>
 						<li class="breadcrumb-item"><a href="./NEET.html">NEET</a></li>
-						<li class="breadcrumb-item"><a href="./NEETEnglish.html">English</a></li>
-						<li class="breadcrumb-item active">StudyMaterial</li>
+						<li class="breadcrumb-item"><a href="./NEETTamil.html">Tamil</a></li>
+						<li class="breadcrumb-item active">QuestionPapers</li>
 					</ol>
 				</div>
 			</div>
@@ -89,32 +89,11 @@
 			<!--Class selection-->
 			<div class="row  justify-content-md-center">
 				<div class="col-xs-12 col-md-8">
-					
-					<!--Biology-->
-					<ul class="list-group">
-						<li class="list-group-item list-group-item-action standardlist listtopic" data-toggle="collapse" data-target="#demo">Biology</li>
-					</ul>
-					<div id="demo" class="collapse">
-						<li class="list-group-item list-group-item-action standardlist"><div class="pdfAction col-xs-12">pdf links here.</div><div class="pdfAction col-xs-12"><a href="assets/pdf/sample.pdf" target="_blank">View</a> | <a href="download.php?file=sample">Download</a></div></li>
-					</div> 
-					
-					<!--Physics-->
-					<ul class="list-group">
-						<li class="list-group-item list-group-item-action standardlist listtopic" data-toggle="collapse" data-target="#demo1">Physics</li>
-					</ul>
-					<div id="demo1" class="collapse">
-						<li class="list-group-item list-group-item-action standardlist"><div class="col-xs-12">pdf links here.</div><div class="pdfAction col-xs-12"><a href="assets/pdf/sample.pdf" target="_blank">View</a> | <a href="download.php?file=sample">Download</a></div></li>
-					</div> 
-					
-					
-					<!--Chemistry-->
-					<ul class="list-group">
-						<li class="list-group-item list-group-item-action standardlist listtopic col-xs-12" data-toggle="collapse" data-target="#demo3">Chemistry</li>
-					</ul>
-					<div id="demo3" class="collapse">
-						<li class="list-group-item list-group-item-action standardlist row-container col-xs-12"><div class="col-xs-12">pdf links here.</div><div class="pdfAction col-xs-12"><a href="assets/pdf/sample.pdf" target="_blank">View</a> | <a href="download.php?file=sample">Download</a></div></li>
-					</div> 
-				 
+					<?php
+						echo "
+							<iframe src='https://drive.google.com/embeddedfolderview?id=1a19zAB9lXlFM6Ei0TbAezXbFIs8sU5Hm#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+						";
+					?>
 				</div>
 			</div>
 
@@ -133,7 +112,7 @@
 						<h5>Links</h5>
 						<ul class="list-unstyled">
 							<li><a href="./index.php">Home</a></li>
-							<li><a href="/AboutUs.html">About Us</a></li>
+							<li><a href="./AboutUs.html">About Us</a></li>
 							<li><a href="./ContactUs.php">Contact Us</a></li>
 						</ul>
 					</div>

@@ -107,35 +107,37 @@
 							switch($_GET['standard']) {
 								case 1:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1UNasmR48Hls_73_fQ_BNqKhYEyASWNc9#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 2:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1otWnGEnXocJzeAoUU5XtwLRUh-9nZ8Hj#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 3:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1552IkJSvqEEfA-ZuVyxio34c9u_pkArj#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 4:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1qGW6IcDo562vLoVIJSaYDyfM-MGrINlg#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 5:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1ceHxB6UBe_cEfhtSBMf9R0Cu7-_d1YGR#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 6:
-									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard6/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1leZLrVeuYkMYWL7IzajmO8XUSqAFWr4a#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 7:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1IgZPbrQqD7K-HLG3Iel70mMkswdfSQOB#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 8:
@@ -157,12 +159,12 @@
 									break;
 								case 11:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1aDXSoDV_ZH5o5UNZhsAgv780J2Ru8M3h#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 12:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1OGGvDxbTbmW4sFDu5bPNLWnTEBdoqg6N#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								default:
@@ -181,62 +183,62 @@
 							switch($_GET['standard']) {
 								case 1:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1bhgkUmBJvD5VRPisY_UT_TM6ivYyNx_7#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 2:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1RTvVJ6icreA9R8rOjqVicAXApRTE7VgG#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 3:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1u1EgYaqYT0fU2zQW-Tgx-gWXynOQEzTV#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 4:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1mQQcMXE7EatbGfwoTFMWKC_AEL-f1YaL#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 5:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1g64qSdpyzXsAH7lT0TrqOaBeaqWozHxa#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 6:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1_NIoKxmqbGO-cvE1wV9hARCjaVTDTGDk#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 7:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=10sUkgWmBAEAe841NI4Mu5Eno3luDzZqV#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 8:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1UyleFRRbLup7Tw8OUl-SL171AbsC-cjK#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 9:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1gOPQzAqmzSMcCLO4XcvHinlBexnnWdkv#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 10:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1_lOrOstgrkCbADkQiamrmngowJaghjew#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 11:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1sen475KXYk3xK82PeJhB9qivzNQusJR5#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								case 12:
 									echo "
-									<iframe src='https://drive.google.com/embeddedfolderview?id=#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1Z3oW3BAjncGP14zF-Mk1hUFqGd55Bw2a#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
 									";
 									break;
 								default:

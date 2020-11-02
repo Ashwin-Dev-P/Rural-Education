@@ -105,19 +105,29 @@
 						if( $_GET['content'] == "StudyMaterial"){
 							switch($_GET['standard']) {
 								case 1:
-									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard1/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1l_keeH76gG-di5vlZeiyuqKrGJA9Dspj#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 2:
-									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard2/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1eN0skg4jtNr5jHyLg7_0EKpQ7hvB3PyX#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 3:
-									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard3/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1wDXhpqceKBLNEAXPlsQ1B4KbAqi3fge_#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 4:
-									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard4/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=12X-uVrT9cgH-bNjxIrX_TARiY030WzYy#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 5:
-									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard5/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=10P8D-ROhjX23QJYUEgThZSN8H1vgxNh7#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 6:
 									echo "
@@ -125,7 +135,9 @@
 									";
 									break;
 								case 7:
-									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard7/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1l0PI1NcClcncQT5tHBIGXCEjkEilEScI#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 8:
 									echo "
@@ -145,10 +157,14 @@
 									";
 									break;
 								case 11:
-									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard11/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1E3yTLBDOlSO6G8Ab-QopAk5OPsTDstVq#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 12:
-									$path="assets/pdf/StateBoard/English/StudyMaterial/Standard12/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1kaKWn0kwAl4K-UHNAB1-ZjdfPf64T8IQ#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								default:
 									echo "
@@ -165,40 +181,64 @@
 							
 							switch($_GET['standard']) {
 								case 1:
-									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard1/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1ZAk0pA1oHNY_rCtLL5dWErypquY7-MHu#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 2:
-									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard2/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1_wlrKV_3_7XXlVYCkoG1nzY9z5Ugcj0Q#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 3:
-									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard3/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1zjpZQ_h62y-jQ7W7avcOq3LK5yp2MMG3#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 4:
-									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard4/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1Emfm_n9vuZSMCd4GPs7-V6U_DrORz7wC#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 5:
-									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard5/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1QY1cBdVbHrvjXxTQJafPXOfw8BC4N_hX#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 6:
-									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard6/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1FORLh754EkS_6Iob5MYH3pL75z0Fz44M#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 7:
-									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard7/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1gqgWEsWn5y7u5-e4QTGR1JYGrYarr9Fa#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 8:
-									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard8/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1-z02bpsLGgOCmuw24EIB74vSSTHmyxUk#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 9:
-									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard9/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1ZX51YHRcuqnykemUlfs1zW-sffzE1tHa#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 10:
-									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard10/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1JYXGcRGRmjXf_DI4LgkimADNVaUbqfl9#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 11:
-									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard11/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1k8TJFzFDwN4fvc_iUic4a4PSccD1VZRg#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								case 12:
-									$path="assets/pdf/StateBoard/English/QuestionPapers/Standard12/";
+									echo "
+									<iframe src='https://drive.google.com/embeddedfolderview?id=1iRxOqmzSPrFsVAKTvmI_opOCbfOBsqtw#list' width='100%' height='500' frameborder='0' class='responsive-iframe'></iframe>
+									";
 									break;
 								default:
 									echo "

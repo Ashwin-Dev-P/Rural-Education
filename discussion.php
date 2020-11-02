@@ -1,6 +1,74 @@
 <?php
 	session_start();
 	require_once "pdo.php";
+	$salt = 'XyZzy12*_';
+	$stored_hash = 'ac7cc39c493be9ccbd7548984d90185e';
+	
+	
+	if (isset($_POST['username']) && isset($_POST['password'])) {
+		if( strlen($_POST['password']) < 1 && strlen($_POST['username']) < 1 ){
+			$_SESSION['error'] = "Username and Password is required";
+			header("Location: DiscussionForum.php");
+			return;
+		}
+		else if (strlen($_POST['username']) < 1 ) {
+			$_SESSION["password"]= $_POST["password"];
+			$_SESSION['error'] = "Username is required";
+			header("Location: DiscussionForum.php");
+			return;
+		}
+		else if( strlen($_POST['password']) < 1  ){
+			$_SESSION["username"]= $_POST["username"];
+			$_SESSION['error'] = "Password is required";
+			header("Location: DiscussionForum.php");
+			return;
+		}
+		else {
+			//The username and password entered by the user will be stored in session even before validating them.
+			//So that it can be displayed for them to correct even if it is wrong. 
+			$_SESSION["username"]= $_POST["username"];
+			$_SESSION["password"]= $_POST["password"];
+			
+			//For value
+			$_SESSION["usernamevalue"]= $_POST["username"];
+			$_SESSION["passwordvalue"]= $_POST["password"];
+		
+			$stmt = $pdo->prepare("SELECT username,password,user_id FROM accounts WHERE username= :username");
+			$stmt -> execute(array(":username" => $_POST['username']));
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		
+			if($row !== false){
+			
+				$RetrievedPasswordHash = $row["password"];
+				$check = hash('md5', $salt.$_POST['password']);
+				if ($check == $RetrievedPasswordHash) {
+					$_SESSION['user_id'] = $row['user_id'];
+					
+					$_SESSION['loggedin'] = "true";
+					error_log("Login success ".$_POST['username']);
+					$_SESSION['username'] = htmlentities($_POST['username']);
+					
+					$_SESSION['success'] = "Logged In.";
+					header("Location: DiscussionForum.php");
+					return;
+				} 
+				else {
+					$pass = $_POST['password'];
+				
+					$_SESSION['error'] = "Sorry, your password was incorrect. Please double-check your password.";
+					error_log(" || Login fail || account name =".$_POST['username']." || Password="." $pass"." || ");
+					header("Location: DiscussionForum.php");
+					return;
+				}
+			}
+			else{
+				$_SESSION["error"] = "The username you entered doesn't belong to an account. Please check your username and try again.";
+				header("Location: DiscussionForum.php");
+				return;
+			}
+	}
+	}
+	
 	if( isset($_POST['replybutton']) ){
 		if(isset($_SESSION['user_id']) && strlen($_SESSION['user_id'])> 0){
 			if(isset($_POST['reply']) && strlen($_POST['reply'])> 0){
