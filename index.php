@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html lang = "en">
 	<head>
@@ -29,6 +32,7 @@
 
 		<link rel="stylesheet" href="assets/css/styles.css">
 		<link rel="stylesheet" href="assets/css/index.css">
+		<link rel="stylesheet" href="assets/css/dropdown.css">
 	</head>
 	<body>
 
@@ -49,6 +53,34 @@
 							<li class="nav-item"><a class="nav-link" href="./aboutus.html"><span class="fa fa-info fa-lg"></span> About Us</a></li>
 							<li class="nav-item"><a class="nav-link" href="./contactus.php"><span class="fa fa-address-card fa-lg"></span> Contact Us</a></li>
 							<li class="nav-item"><a class="nav-link" href="./DiscussionForum.php"><span class="fas fa-comments fa-lg"></span>Discussion Forums</a></li>
+							<div class="dropdown">
+									<a class="nav-item"><a class="nav-link">
+										<?php
+											if( isset($_SESSION['username']) && strlen($_SESSION['username'])>0 ){
+												echo $_SESSION['username'];
+											}
+											else{
+												echo "My Account";
+											}
+										?>
+										
+									  <i class="fa fa-caret-down"></i>
+									</a>
+									<div class="dropdown-content dropdown-menu">
+										<?php
+											if(!isset($_SESSION['user_id']) || strlen($_SESSION['user_id']) <1 ){
+												echo "
+												<li class='nav-item '><a class='mydropdownitem' href='SignUp.php'>Sign Up</a></li>
+												<li class='nav-item '><a class='mydropdownitem' href='Login.php'>Log In</a></li>
+												";
+											}
+										?>
+										<li class="nav-item"><a class="mydropdownitem" href="./aboutus.html"> About Us</a></li>
+										<li class="nav-item"><a class="mydropdownitem" href="./contactus.php"> Contact Us</a></li>
+										<li class="nav-item"><a class="mydropdownitem" href="./logout.php">Log Out</a></li>
+										
+									</div>
+								</div>
 						</ul>
 						
 					</div>
@@ -62,69 +94,67 @@
 			</nav>
 			</div>
 		</header>
-		
+		<div class="col-xs-12 col-md-12 d-none d-md-block" style="margin-top:10px;" >
+			<div id="mycarousel" class="carousel slide " data-ride="carousel" >
+				<div class="carousel-inner" role="listbox">
+				
+					<div class="carousel-item active">
+						<img class="d-block img-fluid"
+							src="assets/img/EducationAlone2.jpg" alt="Education" width="100%" height="100%">
+						<div class="carousel-caption d-none d-md-block">
+							<h2 style="color:white;font-size:50px;"> Rural Education </h2>
+							<p class="d-none d-sm-block" style="color:white;font-size:32px;">Developing educational facilities in rural areas can be made easily through this website.</p>
+						</div>
+					</div>
+					
+					<div class="carousel-item">
+						<img class="d-block img-fluid"
+						src="assets/img/bookopen.jpg" alt="Books" width="100%" height="100%">
+						<div class="carousel-caption d-none d-md-block">
+							<h2 style="color:white;font-size:50px;">Books </h2>
+							<p class="d-none d-sm-block" style="color:white;font-size:32px;">Study materials for stateboard and NEET is available along with model question papers.</p>
+						</div>
+					</div>
+					
+					
+					<div class="carousel-item">
+						<img class="d-block img-fluid"
+						src="assets/img/pencils.jpg" alt="RuralEducation" width="100%">
+						<div class="carousel-caption d-none d-md-block">
+							<h2 style="color:white;font-size:50px;">Education</h2>
+							
+							<p class="d-none d-sm-block" style="color:white;font-size:32px;">Free study material for everyone.
+							</p>
+						</div>
+					</div>
+					
+					
+					
+				</div>
+				<ol class="carousel-indicators">
+					<li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#mycarousel" data-slide-to="1"></li>
+					<li data-target="#mycarousel" data-slide-to="2"></li>
+				</ol>
+				<a class="carousel-control-prev" href="#mycarousel" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon"></span>
+				</a>
+				<a class="carousel-control-next" href="#mycarousel" role="button" data-slide="next">
+					<span class="carousel-control-next-icon"></span>
+				</a>
+				
+					<button class="btn btn-danger btn-sm" id="carouselButton">
+					<span id="carousel-button-icon" class="fa fa-pause"></span>
+				</button>
+				
+			</div>
+		</div>
 		<!--Main-->
 		<div class="container mainbody">
-			<div class="row row-content justify-content-md-center d-none d-md-block">
-				<div class="col-xs-12 col-md-12">
-					<div id="mycarousel" class="carousel slide " data-ride="carousel">
-						<div class="carousel-inner" role="listbox">
-						
-							<div class="carousel-item active">
-								<img class="d-block img-fluid"
-									src="assets/img/EducationAlone2.jpg" alt="Education" width="100%" height="100%">
-								<div class="carousel-caption d-none d-md-block">
-									<h2 style="color:white;font-size:50px;"> Rural Education </h2>
-									<p class="d-none d-sm-block" style="color:white;font-size:32px;">Developing educational facilities in rural areas can be made easily through this website.</p>
-								</div>
-							</div>
-							
-							<div class="carousel-item">
-								<img class="d-block img-fluid"
-								src="assets/img/bookopen.jpg" alt="Books" width="100%" height="100%">
-								<div class="carousel-caption d-none d-md-block">
-									<h2 style="color:white;font-size:50px;">Books </h2>
-									<p class="d-none d-sm-block" style="color:white;font-size:32px;">Study materials for stateboard and NEET is available along with model question papers.</p>
-								</div>
-							</div>
-							
-							
-							<div class="carousel-item">
-								<img class="d-block img-fluid"
-								src="assets/img/pencils.jpg" alt="RuralEducation" width="100%">
-								<div class="carousel-caption d-none d-md-block">
-									<h2 style="color:white;font-size:50px;">Education</h2>
-									
-									<p class="d-none d-sm-block" style="color:white;font-size:32px;">Free study material for everyone.
-									</p>
-								</div>
-							</div>
-							
-							
-							
-						</div>
-						<ol class="carousel-indicators">
-							<li data-target="#mycarousel" data-slide-to="0" class="active"></li>
-							<li data-target="#mycarousel" data-slide-to="1"></li>
-							<li data-target="#mycarousel" data-slide-to="2"></li>
-						</ol>
-						<a class="carousel-control-prev" href="#mycarousel" role="button" data-slide="prev">
-							<span class="carousel-control-prev-icon"></span>
-						</a>
-						<a class="carousel-control-next" href="#mycarousel" role="button" data-slide="next">
-							<span class="carousel-control-next-icon"></span>
-						</a>
-						
-							<button class="btn btn-danger btn-sm" id="carouselButton">
-							<span id="carousel-button-icon" class="fa fa-pause"></span>
-						</button>
-						
-					</div>
-				</div>
-			</div>
+			
 			<div class="row getstarted">
 				<div class="col-sm-8 offset-sm-2 ">
-					<a href="./Board.html">
+					<a href="./Board.php">
 						<div class="card " >
 							
 							<div class="card-body">
@@ -133,12 +163,6 @@
 						</div>
 					</a>
 				</div>
-					
-
-
-
-				
-
 			</div>
 		</div>
 		

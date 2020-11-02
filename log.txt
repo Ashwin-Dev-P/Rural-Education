@@ -131,3 +131,9 @@ Stack trace:
 #0 {main}
   thrown in C:\XAMPP\htdocs\myfiles\mywork\Rural Education\DiscussionForum.php on line 438
 [01-Nov-2020 09:05:00 Europe/Berlin] PHP Recoverable fatal error:  Object of class PDOStatement could not be converted to string in C:\XAMPP\htdocs\myfiles\mywork\Rural Education\DiscussionForum.php on line 438
+[01-Nov-2020 15:33:55 Europe/Berlin]  || Login fail || account name =Ashwindev14 || Password= Ash || 
+[01-Nov-2020 15:34:03 Europe/Berlin] Login success Ashwindev14
+[01-Nov-2020 15:35:38 Europe/Berlin] Login success Ashwindev14
+[01-Nov-2020 15:36:55 Europe/Berlin] Login success Ashwindev14
+[02-Nov-2020 06:35:40 Europe/Berlin] Login success Ashwindev14
+[02-Nov-2020 06:49:56 Europe/Berlin] Login success Ashwindev14

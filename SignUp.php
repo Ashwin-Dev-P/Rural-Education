@@ -194,7 +194,7 @@
 		$_SESSION['fullname'] = "";
 	}
 	if(!isset($_SESSION['username'])){
-		//$_SESSION['username'] = "";
+		$_SESSION['username'] = "";
 	}
 	if(!isset($_SESSION['password'])){
 		$_SESSION['password'] = "";
@@ -242,6 +242,14 @@
 
 		<link rel="stylesheet" href="assets/css/styles.css">
 		<link rel="stylesheet" href="assets/css/board.css">
+		<style>
+			body{
+				background-color:#E9E7E9;
+			}
+			.myformdiv{
+				background-color: #FFFFFF;
+			}
+		</style>
 	</head>
 	<body>
 		<!--Modal-->
@@ -291,13 +299,13 @@
 					<div class="container">
 
 						<!--Logo-->
-						<a class="navbar-brand mr-auto" href="./index.html"><img src="assets/img/RuralEducationLogo.png" height="30" width="61"></a>
+						<a class="navbar-brand mr-auto" href="./index.php"><img src="assets/img/RuralEducationLogo.png" height="30" width="61"></a>
 
 
 						<!--NavBar-->
 						<div class="collapse navbar-collapse" id="Navbar">
 							<ul class="navbar-nav  ml-auto">  
-								<li class="nav-item active"><a class="nav-link" href="./index.html"><span class="fa fa-home fa-lg"></span> Home</a></li>
+								<li class="nav-item active"><a class="nav-link" href="./index.php"><span class="fa fa-home fa-lg"></span> Home</a></li>
 								<li class="nav-item"><a class="nav-link" href="./aboutus.html"><span class="fa fa-info fa-lg"></span> About Us</a></li>
 								<li class="nav-item"><a class="nav-link" href="./contactus.php"><span class="fa fa-address-card fa-lg"></span> Contact Us</a></li>
 							</ul>
@@ -321,7 +329,7 @@
 			<div class="row row-container mybreadcrumbs"> 
 				<div class="col-12">
 					<ol class="col-12 breadcrumb">
-						<li class="breadcrumb-item"><a href="./index.html">Home</a></li>
+						<li class="breadcrumb-item"><a href="./index.php">Home</a></li>
 						<li class="breadcrumb-item active">Sign Up</li>
 					</ol>
 				</div>
@@ -333,7 +341,7 @@
 				<div class="row container  justify-content-center">	
 			   
 					<!--Sign In Form-->
-					<div class="col-12 border">
+					<div class="col-12 col-md-8 border myformdiv">
 						<div class="col-12 justify-content-center ">
 							<p style="text-align:center;font-weight:700;font-size:55px;color:#512DA8;">SIGN UP</p>
 						</div>
@@ -394,7 +402,7 @@
 						</form>
 					</div>
 					
-					<div class="col-12 border  justify-content-center">
+					<div class="col-12 col-md-8 border  justify-content-center myformdiv">
 						<p style="text-align:center;padding:30px;font-size:25px;" >Already have an account?<a href="login.php">LOG IN</a></p>
 					</div>
 					
@@ -419,7 +427,7 @@
 					<div class="col-12 offset-1 col-sm-2">
 						<h5>Links</h5>
 						<ul class="list-unstyled">
-							<li><a href="./index.html">Home</a></li>
+							<li><a href="./index.php">Home</a></li>
 							<li><a href="./AboutUs.html">About Us</a></li>
 							<li><a href="./ContactUs.php">Contact Us</a></li>
 						</ul>

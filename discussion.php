@@ -2,16 +2,25 @@
 	session_start();
 	require_once "pdo.php";
 	if( isset($_POST['replybutton']) ){
-		if(isset($_POST['reply']) && strlen($_POST['reply'])> 0){
-			$sql = "INSERT INTO discussions_reply (discussion_id,user_id, reply) VALUES (:discussion_id,:user_id ,:reply)";
-			
-			$stmt = $pdo->prepare($sql);
-			
-			$stmt->execute(array(
-				':discussion_id' => htmlentities($_GET['discussion_id']),
-				':user_id' => htmlentities($_SESSION['user_id']),
-				':reply' => htmlentities($_POST['reply'])
-			));
+		if(isset($_SESSION['user_id']) && strlen($_SESSION['user_id'])> 0){
+			if(isset($_POST['reply']) && strlen($_POST['reply'])> 0){
+				$sql = "INSERT INTO discussions_reply (discussion_id,user_id, reply) VALUES (:discussion_id,:user_id ,:reply)";
+				
+				$stmt = $pdo->prepare($sql);
+				
+				$stmt->execute(array(
+					':discussion_id' => htmlentities($_GET['discussion_id']),
+					':user_id' => htmlentities($_SESSION['user_id']),
+					':reply' => htmlentities($_POST['reply'])
+				));
+				$_SESSION['success'] = "Reply posted.";
+			}
+			else if(isset($_POST['reply']) && strlen($_POST['reply'])< 1){
+				$_SESSION['error'] = "Type in the reply box.";
+			}
+		}
+		else{
+			$_SESSION['error'] = "Log In to reply in the discussions.";
 		}
 	}
 ?>
@@ -47,8 +56,151 @@
 
 		<link rel="stylesheet" href="assets/css/styles.css">
 		<link rel="stylesheet" href="assets/css/DiscussionForum.css">
+		<link rel="stylesheet" href="assets/css/dropdown.css">
+		
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/modal.js"></script>
 	</head>
 	<body>
+		<!--Error Modal-->
+		<div id="infomodal" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-lg" role="content">
+				<!-- Modal content-->
+				<div class="modal-content">
+					
+					<div class="modal-header">
+							<h4 class="myModalLabel" >INFO</h4>
+						
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						
+					</div>
+					<div class="modal-body">
+						<div class="row container ">
+							
+								<div class="col-xs-12 col-md-12 ">
+								<?php
+									if( isset($_SESSION['error']) ){
+										echo "<p style='color:red;font-size:25px;'>".$_SESSION['error']."</p>";
+										unset($_SESSION['error']);
+									}
+								?>
+								</div>
+								<div class="col-xs-12 col-md-12 ">	
+								<?php
+									if( isset($_SESSION['success']) ){
+										echo "<p style='color:green;font-size:25px;'>".$_SESSION['success']."</p>";
+										unset($_SESSION['success']);
+									}
+									
+								?>
+								</div>
+							
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Login  Modal-->
+		<div id="loginModal" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-lg" role="content">
+				<!-- Modal content-->
+				<div class="modal-content">
+					
+					<div class="modal-header">
+							<h4 class="myModalLabel" >LOGIN </h4>
+						
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						
+					</div>
+					<div class="modal-body">
+						<div class="row container">	
+			   
+								<!--Sign In Form-->
+								<div class="col-12 ">
+									<form method="post" id="loginform" name="loginform" >
+										
+										<div class="container">
+											<div class="form-group row ">
+												<label for="name" class="col-md-2 col-form-label">User Name</label>
+												<div class="col-md-10">
+													
+													<input type="text" class="form-control" id="username" name="username" placeholder="Name" value="<?=$_SESSION['username']?>">
+												</div>
+											</div>
+											
+											
+											<div class="form-group row">
+												<label for="name" class="col-md-2 col-form-label">Password</label>
+												<div class="col-md-10">
+													<input type="password" class="form-control" id="password" name="password" placeholder="password" value="<?=$_SESSION['password']?>">
+												</div>
+											</div>
+											
+											
+											
+											<div class="form-group row-container">
+												<div style="float:left;">
+												<div class="col-xs-6 ">
+													<button type="button" class="btn btn-secondary" name="cancel" id="cancel" data-dismiss="modal">Cancel</button>
+												</div>
+												</div>
+												
+												<div class="ml-auto">
+												<div class="col-xs-6 ">
+													<button type="submit" class="btn btn-primary " name="login" id="login" style="float:right;" >Login</button>
+												</div>
+												</div>
+												
+											</div>
+										</div>
+										
+
+									</form>
+								</div>
+								
+								
+							
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div><!--Modal closing-->
+		
+		<?php
+			if(isset($_POST['replybutton'])){
+				$_POST['replybutton'] = trim($_POST['replybutton'],' ');
+				
+				
+					if( isset($_POST['replybutton']) && strlen($_POST['replybutton']) > 0 ){
+						//unset($_SESSION['username']);
+						if( !isset($_SESSION['user_id']) || strlen($_SESSION['user_id']) < 1){
+							echo "<script>togglelogin();</script>";
+						}
+						else{
+							//$_SESSION['success'] = "Discussion posted.";
+							echo "<script>toggleinfo();</script>";
+						}
+					}
+					else{
+						//$_SESSION['error'] = "Type your topic of dicussion.";
+						echo "<script>toggleinfo();</script>";
+					}
+				
+			}
+			
+			if(!isset($_SESSION['loggedin']) ){
+				
+				echo "<script>toggleinfo();</script>";
+			}
+			
+			
+			
+		?>
+		
 
 		<!-- Header -->
 		<header>
@@ -57,31 +209,50 @@
 					<div class="container">
 
 						<!--Logo-->
-						<a class="navbar-brand mr-auto" href="./index.html"><img src="assets/img/RuralEducationLogo.png" height="30" width="61"></a>
+						<a class="navbar-brand mr-auto" href="./index.php"><img src="assets/img/RuralEducationLogo.png" height="30" width="61"></a>
 
 
 						<!--NavBar-->
 						<div class="collapse navbar-collapse" id="Navbar">
 							<ul class="navbar-nav  ml-auto">  
-								<li class="nav-item active"><a class="nav-link" href="./index.html"><span class="fa fa-home fa-lg"></span> Home</a></li>
-								<li class="nav-item"><a class="nav-link" href="./aboutus.html"><span class="fa fa-info fa-lg"></span> About Us</a></li>
-								<li class="nav-item"><a class="nav-link" href="./contactus.php"><span class="fa fa-address-card fa-lg"></span> Contact Us</a></li>
+								<li class="nav-item active"><a class="nav-link" href="./index.php"><span class="fa fa-home fa-lg"></span> Home</a></li>
+								<div class="dropdown">
+									<a class="nav-item"><a class="nav-link">
+										<?php
+											if( isset($_SESSION['username']) && strlen($_SESSION['username'])>0 ){
+												echo $_SESSION['username'];
+											}
+											else{
+												echo "My Account";
+											}
+										?>
+										
+									  <i class="fa fa-caret-down"></i>
+									</a>
+									<div class="dropdown-content dropdown-menu">
+										<?php
+											if(!isset($_SESSION['user_id']) || strlen($_SESSION['user_id']) <1 ){
+												echo "
+												<li class='nav-item '><a class='mydropdownitem' href='SignUp.php'>Sign Up</a></li>
+												<li class='nav-item '><a onclick='togglelogin();return false;' class='mydropdownitem' href='Login.php'>Log In</a></li>
+												";
+											}
+										?>
+										<li class="nav-item"><a class="mydropdownitem" href="./aboutus.html"> About Us</a></li>
+										<li class="nav-item"><a class="mydropdownitem" href="./contactus.php"> Contact Us</a></li>
+										<li class="nav-item"><a class="mydropdownitem" href="./logout.php">Log Out</a></li>
+										
+									</div>
+								</div>
 							</ul>
 							
 						</div>
 						
+						<!--Ham button-->
 						<button class="navbar-toggler btn-sm" type="button" data-toggle="collapse" data-target="#Navbar">
 							<span class="navbar-toggler-icon"></span>
 						</button>
-						
-						
-
 					</div>
-					
-					
-
-					
-					
 				</nav>
 			</div>
 		</header>
@@ -94,8 +265,9 @@
 			<div class="row row-container mybreadcrumbs"> 
 				<div class="col-12">
 					<ol class="col-12 breadcrumb">
-						<li class="breadcrumb-item"><a href="./index.html">Home</a></li>
-						<li class="breadcrumb-item active">Board</li>
+						<li class="breadcrumb-item"><a href="./index.php">Home</a></li>
+						<li class="breadcrumb-item"><a href="./DiscussionForum.php">Discussion Forum</a></li>
+						<li class="breadcrumb-item active">Discussion</li>
 					</ol>
 				</div>
 			</div>
@@ -197,7 +369,7 @@
 					<div class="col-12 offset-1 col-sm-2">
 						<h5>Links</h5>
 						<ul class="list-unstyled">
-							<li><a href="./index.html">Home</a></li>
+							<li><a href="./index.php">Home</a></li>
 							<li><a href="./AboutUs.html">About Us</a></li>
 							<li><a href="./ContactUs.php">Contact Us</a></li>
 						</ul>
@@ -224,8 +396,32 @@
 		
 		
 		
-		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+		
 		<script src="assets/js/popper.min.js"></script>
-		<script src="assets/js/bootstrap.min.js"></script>
+		
+		
+		<?php
+			if( isset($_SESSION['error']) ){
+				echo "
+				<script>
+					function toggleinfo(){
+						$('#infomodal').modal('show');
+					}
+					toggleinfo(); 
+				</script>";
+				//unset($_SESSION['error']);
+				
+			}
+			else if( isset($_SESSION['success']) ){
+				echo "
+				<script>
+					function toggleinfo(){
+						$('#infomodal').modal('show');
+					}
+					toggleinfo(); 
+				</script>";
+				//unset($_SESSION['success']);
+			}
+		?>
 	</body>
 </html>

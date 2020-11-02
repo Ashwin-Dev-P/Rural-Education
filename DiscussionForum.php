@@ -53,6 +53,8 @@
 					$_SESSION['loggedin'] = "true";
 					error_log("Login success ".$_POST['username']);
 					$_SESSION['username'] = htmlentities($_POST['username']);
+					
+					$_SESSION['success'] = "Logged In.";
 					header("Location: DiscussionForum.php");
 					return;
 				} 
@@ -129,8 +131,12 @@
 	if(!isset($_SESSION['password'])){
 		$_SESSION['password'] = "";
 	}
-	if(!isset($_SESSION['error'])  && !isset($_SESSION['success']) ){
+	
+	if(!isset($_SESSION['error'])  && !isset($_SESSION['success']) && (!isset($_SESSION['user_id']) || strlen($_SESSION['user_id'])<1)  ){
 		$_SESSION['success'] = "Log in to post discussions";
+	}
+	else if(!isset($_SESSION['error'])  && !isset($_SESSION['success']) && (isset($_SESSION['user_id']) && strlen($_SESSION['user_id'])<1)  ){
+		$_SESSION['success'] = "Welcome to discussion forum.";
 	}
 ?>
 <!DOCTYPE html>
@@ -165,7 +171,7 @@
 
 		<link rel="stylesheet" href="assets/css/styles.css">
 		<link rel="stylesheet" href="assets/css/DiscussionForum.css">
-		
+		<link rel="stylesheet" href="assets/css/dropdown.css">
 		
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
@@ -310,6 +316,9 @@
 				
 				echo "<script>toggleinfo();</script>";
 			}
+			if(isset($_SESSION['success'])){
+				echo "<script>toggleinfo();</script>";
+			}
 			
 			
 			
@@ -321,26 +330,41 @@
 					<div class="container">
 
 						<!--Logo-->
-						<a class="navbar-brand mr-auto" href="./index.html"><img src="assets/img/RuralEducationLogo.png" height="30" width="61"></a>
+						<a class="navbar-brand mr-auto" href="./index.php"><img src="assets/img/RuralEducationLogo.png" height="30" width="61"></a>
 
 
 						<!--NavBar-->
 						<div class="collapse navbar-collapse" id="Navbar">
 							<ul class="navbar-nav  ml-auto">  
-								<li class="nav-item active"><a class="nav-link" href="./index.html"><span class="fa fa-home fa-lg"></span> Home</a></li>
-								<li class="nav-item"><a class="nav-link" href="./aboutus.html"><span class="fa fa-info fa-lg"></span> About Us</a></li>
-								<li class="nav-item"><a class="nav-link" href="./contactus.php"><span class="fa fa-address-card fa-lg"></span> Contact Us</a></li>
-								<?php
-									
-									if( !isset($_SESSION['loggedin']) || (!isset($_SESSION['username']) || strlen($_SESSION['username']) < 1) ){
-										echo "<li class='nav-item'><a   class='nav-link' onclick='togglelogin();'><span class='fa fa-sign-in fa-lg'></span> Log In</a></li>";
-									}
-									else{
-										echo "<li class='nav-item'><a   class='nav-link' href='#'>".$_SESSION['username']."</a></li>";
-									}
-									
-									
-								?>
+								<li class="nav-item active"><a class="nav-link" href="./index.php"><span class="fa fa-home fa-lg"></span> Home</a></li>
+								<div class="dropdown">
+									<a class="nav-item"><a class="nav-link">
+										<?php
+											if( isset($_SESSION['username']) && strlen($_SESSION['username'])>0 ){
+												echo $_SESSION['username'];
+											}
+											else{
+												echo "My Account";
+											}
+										?>
+										
+									  <i class="fa fa-caret-down"></i>
+									</a>
+									<div class="dropdown-content dropdown-menu">
+										<?php
+											if(!isset($_SESSION['user_id']) || strlen($_SESSION['user_id']) <1 ){
+												echo "
+												<li class='nav-item '><a class='mydropdownitem' href='SignUp.php'>Sign Up</a></li>
+												<li class='nav-item '><a class='mydropdownitem' href='Login.php'>Log In</a></li>
+												";
+											}
+										?>
+										<li class="nav-item"><a class="mydropdownitem" href="./aboutus.html"> About Us</a></li>
+										<li class="nav-item"><a class="mydropdownitem" href="./contactus.php"> Contact Us</a></li>
+										<li class="nav-item"><a class="mydropdownitem" href="./logout.php">Log Out</a></li>
+										
+									</div>
+								</div>
 							</ul>
 							
 						</div>
@@ -362,7 +386,7 @@
 			<div class="row row-container mybreadcrumbs"> 
 				<div class="col-12">
 					<ol class="col-12 breadcrumb">
-						<li class="breadcrumb-item"><a href="./index.html">Home</a></li>
+						<li class="breadcrumb-item"><a href="./index.php">Home</a></li>
 						<li class="breadcrumb-item active">Discussion Forum</li>
 					</ol>
 				</div>
@@ -465,7 +489,7 @@
 					<div class="col-12 offset-1 col-sm-2">
 						<h5>Links</h5>
 						<ul class="list-unstyled">
-							<li><a href="./index.html">Home</a></li>
+							<li><a href="./index.php">Home</a></li>
 							<li><a href="./AboutUs.html">About Us</a></li>
 							<li><a href="./ContactUs.php">Contact Us</a></li>
 						</ul>

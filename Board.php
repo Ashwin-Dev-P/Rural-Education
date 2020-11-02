@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html lang = "en">
 	<head>
@@ -41,15 +44,14 @@
 					<div class="container">
 
 						<!--Logo-->
-						<a class="navbar-brand mr-auto" href="./index.html"><img src="assets/img/RuralEducationLogo.png" height="30" width="61"></a>
+						<a class="navbar-brand mr-auto" href="./index.php"><img src="assets/img/RuralEducationLogo.png" height="30" width="61"></a>
 
 
 						<!--NavBar-->
 						<div class="collapse navbar-collapse" id="Navbar">
 							<ul class="navbar-nav  ml-auto">  
-								<li class="nav-item active"><a class="nav-link" href="./index.html"><span class="fa fa-home fa-lg"></span> Home</a></li>
-								<li class="nav-item"><a class="nav-link" href="./aboutus.html"><span class="fa fa-info fa-lg"></span> About Us</a></li>
-								<li class="nav-item"><a class="nav-link" href="./contactus.php"><span class="fa fa-address-card fa-lg"></span> Contact Us</a></li>
+								<li class="nav-item active"><a class="nav-link" href="./index.php"><span class="fa fa-home fa-lg"></span> Home</a></li>
+								<li class="nav-item"><a class="nav-link" href="./DiscussionForum.php"><span class="fas fa-comments fa-lg"></span>Discussion Forums</a></li>
 								
 		
 								<div class="dropdown">
@@ -59,16 +61,25 @@
 												echo $_SESSION['username'];
 											}
 											else{
-												echo "LOGIN";
+												echo "My Account";
 											}
 										?>
 										
 									  <i class="fa fa-caret-down"></i>
 									</a>
-									<div class="dropdown-content">
-									  <a href="SignUp.php">Sign Up</a>
-									  <a href="#">Link 2</a>
-									  <a href="#">Link 3</a>
+									<div class="dropdown-content dropdown-menu">
+										<?php
+											if(!isset($_SESSION['user_id']) || strlen($_SESSION['user_id']) <1 ){
+												echo "
+												<li class='nav-item '><a class='mydropdownitem' href='SignUp.php'>Sign Up</a></li>
+												<li class='nav-item '><a class='mydropdownitem' href='Login.php'>Log In</a></li>
+												";
+											}
+										?>
+										<li class="nav-item"><a class="mydropdownitem" href="./aboutus.html"> About Us</a></li>
+										<li class="nav-item"><a class="mydropdownitem" href="./contactus.php"> Contact Us</a></li>
+										<li class="nav-item"><a class="mydropdownitem" href="./logout.php">Log Out</a></li>
+										
 									</div>
 								</div>
 								
@@ -102,7 +113,7 @@
 			<div class="row row-container mybreadcrumbs"> 
 				<div class="col-12">
 					<ol class="col-12 breadcrumb">
-						<li class="breadcrumb-item"><a href="./index.html">Home</a></li>
+						<li class="breadcrumb-item"><a href="./index.php">Home</a></li>
 						<li class="breadcrumb-item active">Board</li>
 					</ol>
 				</div>
@@ -204,9 +215,10 @@
 					<div class="col-12 offset-1 col-sm-2">
 						<h5>Links</h5>
 						<ul class="list-unstyled">
-							<li><a href="./index.html">Home</a></li>
+							<li><a href="./index.php">Home</a></li>
 							<li><a href="./AboutUs.html">About Us</a></li>
 							<li><a href="./ContactUs.php">Contact Us</a></li>
+							
 						</ul>
 					</div>
 					

@@ -22,3 +22,7 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
+.mydropdownitem:hover{
+	background-color:#9575CD;
+	color: floralwhite;
+}
